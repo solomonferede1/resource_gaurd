@@ -12,12 +12,12 @@ class Payroll(Base):
     Payroll model class representing employee payroll records.
 
     Attributes:
-    - id: Primary key (auto-incrementing integer).
+    - id: Primary key - an auto-incrementing integer.
     - total_work_hours: The total number of work hours for the month
     - salary: The total salary for the month i.e Gross Salary.
-    - net_salary: The net salary after deductions
+    - net_salary: The net salary after deductions/tax.
     - payment_date: The date when the payment was made.
-    - employee_id: Foreign key linking this payroll record to an employee.
+    - employee_id: Foreign key linking payroll record to an employee.
     - employee: Relationship to the Employee model
     (used to establish many-to-one relationship between Payroll and Employee).
     '''
