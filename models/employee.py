@@ -9,7 +9,7 @@ from sqlalchemy import Column, String, Integer, Numeric, DateTime
 class Employee(Base):
     '''Employee class - mapped with employee table'''
 
-    __tablename__ = 'employee'
+    __tablename__ = 'employees'
 
     id = Column(Integer, nullable=False, primary_key=True)
     first_name = Column(String(60))
