@@ -2,19 +2,17 @@
 '''Attendance database - model'''
 
 
-from models.employee import Employee
-from base_model import Base
-from sqlalchemy import Column, Integer, String, Numeric,\
+from models.base_model import Base, BaseModel
+from sqlalchemy import Column, Integer, Numeric,\
     Boolean, ForeignKey, DateTime, Date, Computed
-from sqlalchemy.orm import Relationship
+from sqlalchemy.orm import relationship
 from datetime import date
 
-class Attendance(Base):
+class Attendance(BaseModel, Base):
     '''Attendance'''
 
     __tablename__ = 'attendances'
 
-    id = Column(Integer, primary_key=True)
     attendance_date = Column(Date, default=date.today)
     check_in_time = Column(DateTime, nullable=True)
     check_out_time = Column(DateTime, nullable=True)
@@ -24,8 +22,9 @@ class Attendance(Base):
                                        persisted=True))
     status = Column(Boolean)
 
-    employee_id = Column(Integer, ForeignKey('Employee.id', ondelete='CASCADE'), nullable=False)
-    employee = Relationship('Employee', back_populates='attendances')
+    employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
 
 
-Employee.attendances = Relationship('Attendance', back_populates='employee')
+    def __init__(self, *args, **kwargs):
+        """initializes state"""
+        super().__init__(*args, **kwargs)

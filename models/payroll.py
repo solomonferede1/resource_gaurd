@@ -2,12 +2,12 @@
 '''The Payroll model - Database'''
 
 from models.employee import Employee
-from base_model import Base
+from models.base_model import Base, BaseModel
 from sqlalchemy import Column, Integer, Numeric, Date, ForeignKey, Index
 from sqlalchemy.orm import relationship
 
 
-class Payroll(Base):
+class Payroll(BaseModel, Base):
     '''
     Payroll model class representing employee payroll records.
 
@@ -24,7 +24,6 @@ class Payroll(Base):
 
     __tablename__ = 'payrolls'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
     total_work_hours = Column(Numeric(6, 2), nullable=False)
     salary = Column(Numeric(10, 2), nullable=False)
     net_salary = Column(Numeric(10, 2), nullable=False)
@@ -32,7 +31,12 @@ class Payroll(Base):
     employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
 
     # Relationship to the Employee model
-    employee = relationship('Employee', back_populates='payrolls')
+    employee = relationship("Employee",
+                              backref="payrolls",
+                              cascade="all, delete, delete-orphan")
 
+    def __init__(self, *args, **kwargs):
+        '''Create from kwargs'''
 
-Employee.payrolls = relationship('Payroll', back_populates='employee')
+        super.__init__(self, *args, **kwargs)
+

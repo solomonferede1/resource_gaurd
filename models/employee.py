@@ -5,6 +5,7 @@
 from datetime import datetime
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Numeric, DateTime
+from sqlalchemy.orm import relationship 
 
 
 class Employee(BaseModel, Base):
@@ -19,6 +20,10 @@ class Employee(BaseModel, Base):
     phone = Column(String(60), unique=True, nullable=False)
     salary = Column(Numeric(10, 2))
     date_hired = Column(DateTime, default=datetime.utcnow())
+
+    attendances = relationship("Attendance",
+                              backref="employee",
+                              cascade="all, delete, delete-orphan")
 
 
     def __init__(self, *args, **kwargs):

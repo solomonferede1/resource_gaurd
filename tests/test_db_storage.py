@@ -5,15 +5,18 @@ from models.base_model import Base
 from models.employee import Employee
 from models.attendance import Attendance
 from models.payroll import Payroll
-from models import storage
+from models.storage import DBStorage
 
 class TestDBStorage(unittest.TestCase):
+    '''Test the DB storage class and thier methods'''
 
     def test_employee_creation(self):
         """Test the creation of an Employee object"""
-        employee_1 = Employee(first_name="John", last_name="Doe", email="john.doe@example.com", phone="1234567890", salary=5000)
-        storage.new(employee_1)
-        storage.save()
+        employee = Employee(first_name="John", last_name="Doe",
+                            email="john.doe@example.com",
+                            phone="1234567890", salary=5000)
+        self.storage.new(employee)
+        self.storage.save()
 
         # Verify the employee was added to the database
         all_employees = self.session.query(Employee).all()
@@ -25,8 +28,10 @@ class TestDBStorage(unittest.TestCase):
     def test_attendance_creation(self):
         """Test the creation of an Attendance object"""
         # Assume an employee exists
-        self.employee = Employee(first_name="John", last_name="Doe", email="john.doe@example.com", phone="1234567890", salary=5000)
-        self.storage.new(self.employee)
+        employee = Employee(first_name="John", last_name="Doe",
+                            email="john.doe@example.com",
+                            phone="1234567890", salary=5000)
+        self.storage.new(employee)
         self.storage.save()
 
         # Create attendance
@@ -43,7 +48,8 @@ class TestDBStorage(unittest.TestCase):
     def test_payroll_creation(self):
         """Test the creation of a Payroll object"""
         # Assume an employee exists
-        employee = Employee(first_name="John", last_name="Doe", email="john.doe@example.com", phone="1234567890", salary=5000)
+        employee = Employee(first_name="John", last_name="Doe",
+                            email="john.doe@example.com", phone="1234567890", salary=5000)
         self.storage.new(employee)
         self.storage.save()
 
