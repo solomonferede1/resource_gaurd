@@ -9,10 +9,12 @@ from models.base_model import Base
 from models.employee import Employee
 from models.attendance import Attendance
 from models.payroll import Payroll
+from models.catagory import Catagory
+from models.product import Product
 
 
 classes = {'Employee' : Employee, 'Attendance' : Attendance,
-           'Payroll' : Payroll}
+           'Payroll' : Payroll, 'Catagory' : Catagory}
 
 
 
