@@ -30,13 +30,7 @@ class Payroll(BaseModel, Base):
     payment_date = Column(Date, nullable=False)
     employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
 
-    # Relationship to the Employee model
-    employee = relationship("Employee",
-                              backref="payrolls",
-                              cascade="all, delete, delete-orphan")
 
     def __init__(self, *args, **kwargs):
         '''Create from kwargs'''
-
-        super.__init__(self, *args, **kwargs)
-
+        super().__init__(*args, **kwargs)

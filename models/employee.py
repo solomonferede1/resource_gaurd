@@ -25,6 +25,10 @@ class Employee(BaseModel, Base):
                               backref="employee",
                               cascade="all, delete, delete-orphan")
 
+    payroll = relationship("Payroll",
+                              backref="employee",
+                              cascade="all, delete, delete-orphan")
+
 
     def __init__(self, *args, **kwargs):
         """initializes state"""

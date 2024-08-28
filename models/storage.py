@@ -8,9 +8,11 @@ import os
 from models.base_model import Base
 from models.employee import Employee
 from models.attendance import Attendance
+from models.payroll import Payroll
 
 
-classes = {'Employee' : Employee, 'Attendance' : Attendance}
+classes = {'Employee' : Employee, 'Attendance' : Attendance,
+           'Payroll' : Payroll}
 
 
 
