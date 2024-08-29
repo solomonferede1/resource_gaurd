@@ -21,6 +21,7 @@ class Employee(BaseModel, Base):
     salary = Column(Numeric(10, 2))
     date_hired = Column(DateTime, default=datetime.utcnow())
 
+    # Define relationships
     attendances = relationship("Attendance",
                               backref="employee",
                               cascade="all, delete, delete-orphan")
@@ -28,6 +29,10 @@ class Employee(BaseModel, Base):
     payroll = relationship("Payroll",
                               backref="employee",
                               cascade="all, delete, delete-orphan")
+
+    product_transactions = relationship('ProductTransaction', backref='employee')
+
+    raw_material_transactions = relationship('RawMaterialTransaction', backref='employee')
 
 
     def __init__(self, *args, **kwargs):

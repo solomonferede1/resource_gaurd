@@ -11,10 +11,14 @@ from models.attendance import Attendance
 from models.payroll import Payroll
 from models.catagory import Catagory
 from models.product import Product
+from models.supplier import Supplier
+from models.raw_material import RawMaterial
 
 
 classes = {'Employee' : Employee, 'Attendance' : Attendance,
-           'Payroll' : Payroll, 'Catagory' : Catagory}
+           'Payroll' : Payroll, 'Catagory' : Catagory,
+           'Product' : Product, 'Supplier' : Supplier,
+           'RawMaterial' : RawMaterial}
 
 
 

@@ -6,6 +6,10 @@ from models.attendance import Attendance
 from models.payroll import Payroll
 from models.catagory import Catagory
 from models.product import Product
+from models.supplier import Supplier
+from models.raw_material import RawMaterial
+from models.product_transaction import ProductTransaction
+from models.raw_material_transaction import RawMaterialTransaction
 from datetime import date, datetime
 
 # List of Employee objects
@@ -118,6 +122,68 @@ for i in range(100):  # Simulating a large dataset
 for product in product_data:
     new_product = Product(**product)
     storage.new(new_product)
+
+
+suppliers_data = [
+    {'name': 'ABC Electronics', 'contact_info': '0123456789', 'email': 'abc@electronics.com', 'address': '123 Main Street, City, Country'},
+    {'name': 'XYZ Components', 'contact_info': '0987654321', 'email': 'xyz@components.com', 'address': '456 Market Road, City, Country'},
+    {'name': 'LMN Industrial', 'contact_info': '1112223334', 'email': 'lmn@industrial.com', 'address': '789 Factory Avenue, City, Country'}
+]
+
+# Insert suppliers into the database
+for supplier_data in suppliers_data:
+    supplier = Supplier(**supplier_data)
+    storage.new(supplier)
+
+
+raw_materials_data = [
+    {'material_name': 'Copper Wire', 'quantity': 5000, 'unit_price': 10.50, 'created_at': datetime(2024, 8, 1), 'updated_at': datetime(2024, 8, 1), 'supplier_id': 1},
+    {'material_name': 'Plastic Casing', 'quantity': 3000, 'unit_price': 5.75, 'created_at': datetime(2024, 8, 2), 'updated_at': datetime(2024, 8, 2), 'supplier_id': 2},
+    {'material_name': 'Circuit Board', 'quantity': 2000, 'unit_price': 25.00, 'created_at': datetime(2024, 8, 3), 'updated_at': datetime(2024, 8, 3), 'supplier_id': 3},
+    {'material_name': 'LED Light', 'quantity': 4000, 'unit_price': 3.40, 'created_at': datetime(2024, 8, 4), 'updated_at': datetime(2024, 8, 4), 'supplier_id': 1},
+    {'material_name': 'Resistor', 'quantity': 10000, 'unit_price': 0.10, 'created_at': datetime(2024, 8, 5), 'updated_at': datetime(2024, 8, 5), 'supplier_id': 2},
+    {'material_name': 'Capacitor', 'quantity': 8000, 'unit_price': 0.25, 'created_at': datetime(2024, 8, 6), 'updated_at': datetime(2024, 8, 6), 'supplier_id': 3},
+]
+
+# Insert raw materials into the database
+for raw_material_data in raw_materials_data:
+    raw_material = RawMaterial(**raw_material_data)
+    storage.new(raw_material)
+
+
+
+# Example data for product transactions
+product_transactions_data = [
+    {'transaction_type': 'add', 'quantity': 100, 'transaction_date': datetime(2024, 8, 1, 9, 0), 'transaction_by_employee_id': 1, 'product_id': 1},
+    {'transaction_type': 'withdraw', 'quantity': 50, 'transaction_date': datetime(2024, 8, 3, 10, 30), 'transaction_by_employee_id': 2, 'product_id': 2},
+    {'transaction_type': 'add', 'quantity': 200, 'transaction_date': datetime(2024, 8, 5, 11, 15), 'transaction_by_employee_id': 3, 'product_id': 3},
+    {'transaction_type': 'withdraw', 'quantity': 70, 'transaction_date': datetime(2024, 8, 7, 14, 45), 'transaction_by_employee_id': 4, 'product_id': 4},
+    {'transaction_type': 'add', 'quantity': 150, 'transaction_date': datetime(2024, 8, 10, 8, 20), 'transaction_by_employee_id': 5, 'product_id': 5},
+    {'transaction_type': 'withdraw', 'quantity': 30, 'transaction_date': datetime(2024, 8, 12, 16, 50), 'transaction_by_employee_id': 6, 'product_id': 6},
+]
+
+# Insert the data
+for data in product_transactions_data:
+    transaction = ProductTransaction(**data)
+    storage.new(transaction)
+    storage.save()
+
+# Example data for raw material transactions
+raw_material_transactions_data = [
+    {'transaction_type': 'add', 'quantity': 500, 'transaction_date': datetime(2024, 8, 2, 9, 0), 'transaction_by_employee_id': 1, 'raw_material_id': 1},
+    {'transaction_type': 'withdraw', 'quantity': 200, 'transaction_date': datetime(2024, 8, 4, 10, 30), 'transaction_by_employee_id': 2, 'raw_material_id': 2},
+    {'transaction_type': 'add', 'quantity': 300, 'transaction_date': datetime(2024, 8, 6, 11, 15), 'transaction_by_employee_id': 3, 'raw_material_id': 3},
+    {'transaction_type': 'withdraw', 'quantity': 150, 'transaction_date': datetime(2024, 8, 8, 14, 45), 'transaction_by_employee_id': 4, 'raw_material_id': 4},
+    {'transaction_type': 'add', 'quantity': 400, 'transaction_date': datetime(2024, 8, 11, 8, 20), 'transaction_by_employee_id': 5, 'raw_material_id': 5},
+    {'transaction_type': 'withdraw', 'quantity': 100, 'transaction_date': datetime(2024, 8, 13, 16, 50), 'transaction_by_employee_id': 6, 'raw_material_id': 6},
+]
+
+# Insert the data
+for data in raw_material_transactions_data:
+    transaction = RawMaterialTransaction(**data)
+    storage.new(transaction)
+    storage.save()
+
 
 # Save the changes to the database
 storage.save()

@@ -16,8 +16,9 @@ class RawMaterial(BaseModel, Base):
     unit_price = Column(Numeric(15, 2), nullable=False)
     supplier_id = Column(Integer, ForeignKey('suppliers.id'), nullable=False)
 
-    # Define the relationship to the Supplier
-    supplier = relationship('Supplier', backref='raw_materials')
+    # Define relationships
+    transactions = relationship('RawMaterialTransaction', backref='raw_material')
+
 
     def __init__(self, *args, **kwargs):
         '''Initialize the raw material with the given attributes.'''

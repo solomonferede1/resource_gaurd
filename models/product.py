@@ -3,6 +3,7 @@
 
 from models.base_model import Base, BaseModel
 from sqlalchemy import Column, String, Numeric, DateTime, Integer, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 
@@ -19,6 +20,9 @@ class Product(BaseModel, Base):
     deleted_at = Column(DateTime, nullable=True)  # Soft delete column
 
     category_id = Column(Integer, ForeignKey('catagories.id'), nullable=False)
+
+    # Define relationship
+    transactions = relationship('ProductTransaction', backref='product')
 
     def __init__(self, *args, **kwargs):
         '''Call super basemodel class to initialize common att'''
