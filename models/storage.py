@@ -13,6 +13,8 @@ from models.catagory import Catagory
 from models.product import Product
 from models.supplier import Supplier
 from models.raw_material import RawMaterial
+from models.product_transaction import ProductTransaction
+from models.raw_material_transaction import RawMaterialTransaction
 
 
 classes = {'Employee' : Employee, 'Attendance' : Attendance,
