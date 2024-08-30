@@ -39,7 +39,7 @@ class DBStorage:
         MYSQL_DB = os.environ.get('MYSQL_DB')
 
         url = f'mysql+mysqldb://{MYSQL_USER}:{MYSQL_PWD}@{MYSQL_HOST}/{MYSQL_DB}'
-        self.__engine = create_engine(url, echo=True)
+        self.__engine = create_engine(url, echo=False)
 
     def all(self, cls=None):
         """query on the current database session"""
