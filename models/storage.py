@@ -20,7 +20,8 @@ from models.raw_material_transaction import RawMaterialTransaction
 classes = {'Employee' : Employee, 'Attendance' : Attendance,
            'Payroll' : Payroll, 'Catagory' : Catagory,
            'Product' : Product, 'Supplier' : Supplier,
-           'RawMaterial' : RawMaterial}
+           'RawMaterial' : RawMaterial, 'ProductTransaction' : ProductTransaction,
+           'RawMaterialTransaction' : RawMaterialTransaction}
 
 
 
