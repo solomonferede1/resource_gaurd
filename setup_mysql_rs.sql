@@ -9,4 +9,4 @@ FLUSH PRIVILEGES;
 
 -- Environment variables
 
--- MYSQL_USER='RG_user' MYSQL_PWD='RG_password' MYSQL_HOST='localhost' MYSQL_DB='RG_db' HBNB_API_HOST=0.0.0.0 HBNB_API_PORT=5000
+-- MYSQL_USER='RG_user' MYSQL_PWD='RG_password' MYSQL_HOST='localhost' MYSQL_DB='RG_db' RG_API_HOST=0.0.0.0 RG_API_PORT=5000
