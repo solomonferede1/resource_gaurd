@@ -2,11 +2,11 @@
 '''Attendance database - model'''
 
 
+from datetime import date, datetime
 from models.base_model import Base, BaseModel
 from sqlalchemy import Column, Integer, Numeric,\
     Boolean, ForeignKey, DateTime, Date, Computed
 from sqlalchemy.orm import relationship
-from datetime import date, datetime
 
 class Attendance(BaseModel, Base):
     '''Attendance'''
