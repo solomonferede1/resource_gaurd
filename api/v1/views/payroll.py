@@ -18,7 +18,7 @@ def get_payrolls():
 @app_views.route('/employees/<employee_id>/payrolls/', methods=['GET'], strict_slashes=False)
 def get_employee_payrolls(employee_id):
     '''Retrieve all payroll records for a specific employee'''
-    employee = storage.get(Employee, employee_id)
+    employee = storage.get(Employee, int(employee_id))
     if not employee:
         abort(404)
     return jsonify([payroll.to_dict() for payroll in employee.payrolls])
@@ -27,7 +27,7 @@ def get_employee_payrolls(employee_id):
 @app_views.route('/payrolls/<payroll_id>', methods=['GET'], strict_slashes=False)
 def get_payroll(payroll_id):
     """Retrieves a Payroll object"""
-    payroll = storage.get(Payroll, payroll_id)
+    payroll = storage.get(Payroll, int(payroll_id))
     if not payroll:
         abort(404)
     return jsonify(payroll.to_dict())
@@ -36,7 +36,7 @@ def get_payroll(payroll_id):
 @app_views.route('/payrolls/<payroll_id>', methods=['DELETE'], strict_slashes=False)
 def delete_payroll(payroll_id):
     """Deletes a Payroll object"""
-    payroll = storage.get(Payroll, payroll_id)
+    payroll = storage.get(Payroll, int(payroll_id))
     if not payroll:
         abort(404)
     storage.delete(payroll)
@@ -67,7 +67,7 @@ def create_payroll():
 @app_views.route('/payrolls/<payroll_id>', methods=['PUT'], strict_slashes=False)
 def update_payroll(payroll_id):
     """Updates a Payroll record"""
-    payroll = storage.get(Payroll, payroll_id)
+    payroll = storage.get(Payroll, int(payroll_id))
     if not payroll:
         abort(404)
     if not request.is_json:
