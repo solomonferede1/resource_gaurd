@@ -1,0 +1,46 @@
+# Ignore compiled bytecode and cache directories
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environments
+venv/
+env/
+ENV/
+.venv/
+.virtualenv/
+
+# Ignore environment variables
+.env
+.env.*
+
+# Ignore editor and IDE configurations
+.vscode/
+.idea/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Ignore log files
+*.log
+
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
+
+# Ignore build files
+build/
+dist/
+*.egg-info/
+.eggs/
+
