@@ -3,8 +3,9 @@
 
 from models.employee import Employee
 from models.base_model import Base, BaseModel
-from sqlalchemy import Column, Integer, Numeric, Date, ForeignKey, Index
+from sqlalchemy import Column, Integer, Numeric, Date, ForeignKey, Computed
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
 
 class Payroll(BaseModel, Base):
@@ -26,8 +27,8 @@ class Payroll(BaseModel, Base):
 
     total_work_hours = Column(Numeric(6, 2), nullable=False)
     salary = Column(Numeric(10, 2), nullable=False)
-    net_salary = Column(Numeric(10, 2), nullable=False)
-    payment_date = Column(Date, nullable=False)
+    net_salary = Column(Numeric(10, 2), Computed('salary * 0.75', persisted=True))
+    payment_date = Column(Date, default=datetime.now, nullable=False)
     employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
 
 

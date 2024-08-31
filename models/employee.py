@@ -26,7 +26,7 @@ class Employee(BaseModel, Base):
                               backref="employee",
                               cascade="all, delete, delete-orphan")
 
-    payroll = relationship("Payroll",
+    payrolls = relationship("Payroll",
                               backref="employee",
                               cascade="all, delete, delete-orphan")
 
