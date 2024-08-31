@@ -14,19 +14,19 @@ def get_employees():
     return jsonify([employee.to_dict() for employee in all_employees])
 
 
-@app_views.route('/employees/<employee_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/employees/<int:employee_id>', methods=['GET'], strict_slashes=False)
 def get_employee(employee_id):
     """Retrieves an Employee object"""
-    employee = storage.get(Employee, int(employee_id))
+    employee = storage.get(Employee, employee_id)
     if not employee:
         abort(404)
     return jsonify(employee.to_dict())
 
 
-@app_views.route('/employees/<employee_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/employees/<int:employee_id>', methods=['DELETE'], strict_slashes=False)
 def delete_employee(employee_id):
     """Deletes an Employee object"""
-    employee = storage.get(Employee, int(employee_id))
+    employee = storage.get(Employee, employee_id)
     if not employee:
         abort(404)
     storage.delete(employee)
@@ -50,10 +50,10 @@ def create_employee():
     return jsonify(employee.to_dict()), 201
 
 
-@app_views.route('/employees/<employee_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/employees/<int:employee_id>', methods=['PUT'], strict_slashes=False)
 def update_employee(employee_id):
     """Updates an Employee object"""
-    employee = storage.get(Employee, int(employee_id))
+    employee = storage.get(Employee, employee_id)
     if not employee:
         abort(404)
     if not request.is_json:

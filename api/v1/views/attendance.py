@@ -15,20 +15,20 @@ def get_attendances():
     return jsonify([attendance.to_dict() for attendance in all_attendances])
 
 
-@app_views.route('/employees/<employee_id>/attendance', methods=['GET'], strict_slashes=False)
+@app_views.route('/employees/<int:employee_id>/attendance', methods=['GET'], strict_slashes=False)
 def get_attendances_employee_id(employee_id):
     """Retrieves an Employee object"""
-    employee = storage.get(Employee, int(employee_id))
+    employee = storage.get(Employee, employee_id)
     if not employee:
         abort(404)
 
     return jsonify([attendance.to_dict() for attendance in employee.attendances])
 
 
-@app_views.route('/attendances/<attendance_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/attendances/<int:attendance_id>', methods=['DELETE'], strict_slashes=False)
 def delete_attendance(attendance_id):
     """Deletes an Employee object"""
-    attendance = storage.get(Attendance, int(attendance_id))
+    attendance = storage.get(Attendance, attendance_id)
     if not attendance:
         abort(404)
     storage.delete(attendance)
@@ -50,10 +50,10 @@ def create_attendance():
     return jsonify(attendance.to_dict()), 201
 
 
-@app_views.route('/attendances/<attendance_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/attendances/<int:attendance_id>', methods=['PUT'], strict_slashes=False)
 def update_attendance(attendance_id):
     """Updates attendance object"""
-    attendance = storage.get(Attendance, int(attendance_id))
+    attendance = storage.get(Attendance, attendance_id)
     if not attendance:
         abort(404)
     if not request.is_json:
