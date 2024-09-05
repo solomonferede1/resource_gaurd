@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResourceGuard Dashboard</title>
+    <!-- <title>{% block title %}ResourceGuard Dashboard{% endblock %}</title> -->
+     <title>ResourceGuard - Base</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!--Custom css-->
+    <!-- Custom CSS -->
     <link href="/static/css/base.css" rel="stylesheet">
+    <!-- {% block extra_css %}{% endblock %} -->
 </head>
 <body>
     <!-- Header -->
@@ -23,45 +25,48 @@
             <button class="btn btn-link notification-btn" aria-label="Notifications">
                 <img src="https://via.placeholder.com/24x24?text=B" alt="Notification">
             </button>
-            <img src="https://via.placeholder.com/40x40?text=User" alt="User avatar" class="user-avatar">
+            <img src="images/user.JPG" alt="User avatar" class="user-avatar">
         </div>
     </header>
 
     <!-- Sidebar -->
-    <nav class="sidebar">
-        <a href="#" class="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5d5e8d43d1b3e7dfa33c10d0c836416ddd3a7a92cf6701e6b3a71333a891791c?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" alt="Home icon" class="nav-icon" />
-            <span>Home</span>
+    <nav class="sidebar col-md-2 d-flex flex-column">
+        <a href="home.html" class="nav-item">
+            <img src="images/Dashboard.png" alt="Home icon" class="nav-icon">
+            <span>Dashboard</span>
         </a>
-        <a href="#" class="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bffda29f6230946d1f1729a06e7e1c58971d8774af895ad9144a8081c44a14cc?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" alt="Products icon" class="nav-icon" />
+        <a href="product.html" class="nav-item">
+            <img src="images/products.png" alt="Products icon" class="nav-icon">
             <span>Products</span>
         </a>
-        <a href="#" class="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb04f98f1ef99088f10b1b37abbaa2d4c6dcd70fdbb845520633334fc4f89020?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" alt="Raw Materials icon" class="nav-icon-small" />
+        <a href="raw_material.html" class="nav-item">
+            <img src="images/raw_materials.png" alt="Raw Materials icon" class="nav-icon-small">
             <span>Raw Materials</span>
         </a>
-        <a href="#" class="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7e0bbb61b1569877fb004d0c4adaaed2040bcc87ca87466ae48e81bfafe0c729?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" alt="Transactions icon" class="nav-icon-small" />
+        <a href="transaction.html" class="nav-item">
+            <img src="images/transaction.png"Transactions icon" class="nav-icon-small">
             <span>Transactions</span>
         </a>
-        <a href="#" class="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cb5935ab0427fe44a86f3db68ab3456590d0feac2764fa01fd34e600923a3d3e?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" alt="Inventory icon" class="nav-icon" />
+        <a href="inventory.html" class="nav-item">
+            <img src="images/Home.png" alt="Inventory icon" class="nav-icon">
             <span>Inventory</span>
         </a>
-        <a href="#" class="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a5b2dc15e9d85c5565793d2b32359cb512a0cf442e0c2c7149678291a559de88?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" alt="Transactions icon" class="nav-icon-small" />
-            <span>Transactions</span>
-        </a>
-        <a href="#" class="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/078e8fd2da49a7ba0b25f09d447209df09be48a6720e1c53dc516f5de1aee891?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" alt="Employees icon" class="nav-icon" />
+        <a href="employe.html" class="nav-item">
+            <img src="images/employee.png" alt="Employees icon" class="nav-icon">
             <span>Employees</span>
         </a>
         <a href="#" class="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c2cced3333d1be404d53ea4ddd1d59fc243c5fe3677092a6a7ef6de11c6822bb?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" alt="Settings icon" class="nav-icon" />
+            <img src="images/setting.png" alt="Settings icon" class="nav-icon">
             <span>Settings</span>
         </a>
     </nav>
+
+    <!-- Main Content -->
+    <main class="col-md-10">
+    <!--    {% block content %}
+                Page specific content will go here
+            {% endblock %} -->
+    </main>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
