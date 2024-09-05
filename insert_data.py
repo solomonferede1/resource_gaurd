@@ -12,6 +12,7 @@ from models.product_transaction import ProductTransaction
 from models.raw_material_transaction import RawMaterialTransaction
 from datetime import date, datetime
 
+
 # List of Employee objects
 employees = [
     Employee(first_name="John", last_name="Doe", email="john.doe@example.com", phone="1234567890", salary=5000),
