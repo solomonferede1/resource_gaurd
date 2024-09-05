@@ -1,0 +1,124 @@
+/* Header Styles */
+.header {
+    background-color: #5fa2ce;
+    padding: 10px 20px;
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.log-text {
+    font-size:xx-large
+}
+
+.search-bar {
+    width: 50%;
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 25px;
+    border: 1px solid #fff;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+}
+
+.notification-btn, .user-avatar {
+    margin-left: 15px;
+}
+
+.notification-btn img {
+    height: 24px;
+}
+
+.user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background: #afc6cf;
+    padding: 20px 0;
+    height: 100vh;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    background-color: #d4e4eb;
+}
+
+.nav-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.nav-icon-small {
+    width: 24px;
+    height: 24px;
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+    background-color: #f5f8fb;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #0056b3;
+    margin-bottom: 20px;
+}
+
+hr {
+    margin-bottom: 30px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.form-control {
+    border-radius: 25px;
+    padding: 12px 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #d4d4d4;
+    color: #555;
+    font-size: 16px;
+}
+
+.form-check-label {
+    font-size: 16px;
+    color: #555;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 25px;
+    width: 100%;
+}
+
