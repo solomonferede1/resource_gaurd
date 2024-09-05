@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ResourceGuard Dashboard - Raw Material</title>
@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/transaction.css">
-</head>
-<body>
+  </head>
+  <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Header -->
@@ -57,56 +57,78 @@
                     <span>Settings</span>
                 </a>
             </nav>    
-        <main class="content-area col-md-10">
-          <h1 class="transactions-header">Transactions</h1>
-          <div class="transaction-tabs">
-            <button class="tab-button">Product</button>
-            <button class="tab-button">Raw Materials</button>
+            <main class="col-md-10">
+              <div class="row">
+                <h1>Transactions</h1>
+                <div class="d-flex justify-content-between align-items-center col-md-4">
+                  <button class="btn">All</button>
+                  <button class="btn">Product</button>
+                  <button class="btn">Raw Materials</button>
+                </div>
+              </div>
+              <table class="table table-striped mt-3">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Product/Raw Material</th>
+                    <th>Items</th>
+                    <th>Type</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>25 Dec 2020</td>
+                    <td>LED Light</td>
+                    <td>300</td>
+                    <td>ADD</td>
+                  </tr>
+                    <td>2</td>
+                    <td>25 Dec 2020</td>
+                    <td>LED Light</td>
+                    <td>300</td>
+                    <td>ADD</td>
+                  </tr>
+                    <td>3</td>
+                    <td>25 Dec 2020</td>
+                    <td>LED Light</td>
+                    <td>300</td>
+                    <td>ADD</td>
+                  </tr>
+                    <td>4</td>
+                    <td>25 Dec 2020</td>
+                    <td>LED Light</td>
+                    <td>300</td>
+                    <td>ADD</td>
+                  </tr>
+                    <td>5</td>
+                    <td>25 Dec 2020</td>
+                    <td>LED Light</td>
+                    <td>300</td>
+                    <td>Withdraw</td>
+                  </tr>
+                    <td>6</td>
+                    <td>25 Dec 2020</td>
+                    <td>LED Light</td>
+                    <td>300</td>
+                    <td>ADD</td>
+                  </tr>
+                    <td>7</td>
+                    <td>25 Dec 2020</td>
+                    <td>LED Light</td>
+                    <td>300</td>
+                    <td>ADD</td>
+                  </tr>
+                    <td>8</td>
+                    <td>25 Dec 2020</td>
+                    <td>LED Light</td>
+                    <td>300</td>
+                    <td>Withdraw</td>
+                  </tr>
+                </tbody>
+              </table>
+            </main>
           </div>
-          <section class="transaction-table">
-            <header class="table-header">
-              <span>ID</span>
-              <span>Date</span>
-              <span>Product/Raw Material</span>
-              <span>Items</span>
-              <span>Type</span>
-            </header>
-            <div class="table-row">
-              <span class="table-cell">1</span>
-              <span class="table-cell">25 Dec 2020</span>
-              <span class="table-cell">Pat Black</span>
-              <span class="table-cell">25</span>
-              <span class="table-cell">Withdraw</span>
-            </div>
-            <div class="table-row">
-              <span class="table-cell">2</span>
-              <span class="table-cell">26 Dec 2020</span>
-              <span class="table-cell">Angel Jones</span>
-              <span class="table-cell">66</span>
-              <span class="table-cell">ADD</span>
-            </div>
-            <div class="table-row">
-              <span class="table-cell">3</span>
-              <span class="table-cell">26 Dec 2020</span>
-              <span class="table-cell">Max Edwards</span>
-              <span class="table-cell">3</span>
-              <span class="table-cell">ADD</span>
-            </div>
-            <div class="table-row">
-              <span class="table-cell">4</span>
-              <span class="table-cell">26 Dec 2020</span>
-              <span class="table-cell">Bruce Fox</span>
-              <span class="table-cell">120</span>
-              <span class="table-cell">Withdraw</span>
-            </div>
-            <div class="table-row">
-              <span class="table-cell">5</span>
-              <span class="table-cell">27 Dec 2020</span>
-              <span class="table-cell">Devon Fisher</span>
-              <span class="table-cell">15</span>
-              <span class="table-cell">Buy</span>
-            </div>
-          </section>
-        </main>
-      </div>
-    </section>
+    </div>
+  </body>
+</html>
