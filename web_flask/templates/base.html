@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>{% block title %}ResourceGuard Dashboard{% endblock %}</title> -->
+    <title>{% block title %}ResourceGuard Dashboard{% endblock %}</title>
      <title>ResourceGuard - Base</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="/static/css/base.css" rel="stylesheet">
-    <!-- {% block extra_css %}{% endblock %} -->
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <!-- Header -->
@@ -63,9 +63,8 @@
 
     <!-- Main Content -->
     <main class="col-md-10">
-    <!--    {% block content %}
-                Page specific content will go here
-            {% endblock %} -->
+        {% block content %}
+        {% endblock %} 
     </main>
 
     <!-- Bootstrap JS -->
