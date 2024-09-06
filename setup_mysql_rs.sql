@@ -2,7 +2,7 @@
 
 
 -- Environment variables
--- MYSQL_USER='RG_user' MYSQL_PWD='RG_password' MYSQL_HOST='localhost' MYSQL_DB='RG_db' RG_API_HOST=0.0.0.0 RG_API_PORT=5000
+-- MYSQL_USER='RG_USER' MYSQL_PWD='RG_PASSWORD' MYSQL_HOST='localhost' MYSQL_DB='RG_DB' RG_API_HOST=0.0.0.0 RG_API_PORT=5050
 
 -- Delete if the database `RG_DB` if it exists
 DROP DATABASE IF EXISTS RG_DB;
