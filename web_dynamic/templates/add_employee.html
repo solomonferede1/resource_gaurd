@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResourceGuard Dashboard - Employees</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/employee.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Header -->
+            <header class="header col-12 d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <img src="images/logo.jpeg" alt="ResourceGuard">
+                    <span class="logo-text">ResourceGuard</span>
+                </div>
+                <form class="search-bar" role="search">
+                    <input type="search" id="search-input" class="form-control search-input" placeholder="Search products, Raw Materials">
+                </form>
+                <div class="user-actions d-flex">
+                    <img src="images/tof.jpg" alt="User" class="user-avatar">
+                </div>
+            </header>
+        </div>
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="sidebar col-md-2 d-flex flex-column">
+                <a href="home.html" class="nav-item">
+                    <img src="images/Dashboard.png" alt="Home icon" class="nav-icon">
+                    <span>Dashboard</span>
+                </a>
+                <a href="product.html" class="nav-item">
+                    <img src="images/products.png" alt="Products icon" class="nav-icon">
+                    <span>Products</span>
+                </a>
+                <a href="raw_material.html" class="nav-item">
+                    <img src="images/raw_materials.png" alt="Raw Materials icon" class="nav-icon-small">
+                    <span>Raw Materials</span>
+                </a>
+                <a href="transaction.html" class="nav-item">
+                    <img src="images/transaction.png"Transactions icon" class="nav-icon-small">
+                    <span>Transactions</span>
+                </a>
+                <a href="inventory.html" class="nav-item">
+                    <img src="images/Home.png" alt="Inventory icon" class="nav-icon">
+                    <span>Inventory</span>
+                </a>
+                <a href="employe.html" class="nav-item">
+                    <img src="images/employee.png" alt="Employees icon" class="nav-icon">
+                    <span>Employees</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <img src="images/setting.png" alt="Settings icon" class="nav-icon">
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <!-- Main Content -->
+            <main class="col-md-10">
+                <div class="d-flex justify-content-center">
+                    <div class="form-container">
+                        <h2 class="text-center">Add Employee</h2>
+                        <hr>
+                        <br>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="First Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="Last Name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="phone" class="form-control" placeholder="Phone" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Role" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="Password" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="Confirm Password" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <select class="form-control" required>
+                                            <option value="" disabled selected>Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <input type="number" class="form-control" placeholder="Age" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Type</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="employeeType" id="managerType" value="manager" required>
+                                    <label class="form-check-label" for="managerType">
+                                        Manager
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="employeeType" id="employeeType" value="employee">
+                                    <label class="form-check-label" for="employeeType">
+                                        Employee
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

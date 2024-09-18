@@ -20,7 +20,7 @@ class Attendance(BaseModel, Base):
                               Computed("TIMESTAMPDIFF(Hour,\
                                        check_in_time, check_out_time)",
                                        persisted=True))
-    status = Column(Boolean)
+    status = Column(Boolean, nullable=True)
 
     employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
 
