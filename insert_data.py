@@ -26,6 +26,7 @@ employees = [
 # Loop through each employee and save them to the database
 for employee in employees:
     storage.new(employee)
+    storage.save()
 
 attendances = [
     {'attendance_date': '2024-08-28', 'check_in_time': '2024-08-28 09:00:00', 'check_out_time': '2024-08-28 17:00:00', 'employee_id': 1},
@@ -51,28 +52,28 @@ for data in attendances:
 
 payroll_data = [
     # August 2024 payroll
-    {'total_work_hours': 160.00, 'salary': 5000.00, 'net_salary': 4500.00, 'payment_date': date(2024, 8, 28), 'employee_id': 1},
-    {'total_work_hours': 160.00, 'salary': 5500.00, 'net_salary': 4950.00, 'payment_date': date(2024, 8, 28), 'employee_id': 2},
-    {'total_work_hours': 160.00, 'salary': 6000.00, 'net_salary': 5400.00, 'payment_date': date(2024, 8, 28), 'employee_id': 3},
-    {'total_work_hours': 160.00, 'salary': 4800.00, 'net_salary': 4320.00, 'payment_date': date(2024, 8, 28), 'employee_id': 4},
-    {'total_work_hours': 160.00, 'salary': 5200.00, 'net_salary': 4680.00, 'payment_date': date(2024, 8, 28), 'employee_id': 5},
-    {'total_work_hours': 160.00, 'salary': 5700.00, 'net_salary': 5130.00, 'payment_date': date(2024, 8, 28), 'employee_id': 6},
+    {'total_work_hours': 160.00, 'salary': 5000.00, 'payment_date': date(2024, 8, 28), 'employee_id': 1},
+    {'total_work_hours': 160.00, 'salary': 5500.00, 'payment_date': date(2024, 8, 28), 'employee_id': 2},
+    {'total_work_hours': 160.00, 'salary': 6000.00, 'payment_date': date(2024, 8, 28), 'employee_id': 3},
+    {'total_work_hours': 160.00, 'salary': 4800.00, 'payment_date': date(2024, 8, 28), 'employee_id': 4},
+    {'total_work_hours': 160.00, 'salary': 5200.00, 'payment_date': date(2024, 8, 28), 'employee_id': 5},
+    {'total_work_hours': 160.00, 'salary': 5700.00, 'payment_date': date(2024, 8, 28), 'employee_id': 6},
 
     # July 2024 payroll
-    {'total_work_hours': 158.00, 'salary': 5000.00, 'net_salary': 4500.00, 'payment_date': date(2024, 7, 28), 'employee_id': 1},
-    {'total_work_hours': 158.50, 'salary': 5500.00, 'net_salary': 4950.00, 'payment_date': date(2024, 7, 28), 'employee_id': 2},
-    {'total_work_hours': 159.00, 'salary': 6000.00, 'net_salary': 5400.00, 'payment_date': date(2024, 7, 28), 'employee_id': 3},
-    {'total_work_hours': 157.75, 'salary': 4800.00, 'net_salary': 4320.00, 'payment_date': date(2024, 7, 28), 'employee_id': 4},
-    {'total_work_hours': 159.50, 'salary': 5200.00, 'net_salary': 4680.00, 'payment_date': date(2024, 7, 28), 'employee_id': 5},
-    {'total_work_hours': 158.75, 'salary': 5700.00, 'net_salary': 5130.00, 'payment_date': date(2024, 7, 28), 'employee_id': 6},
+    {'total_work_hours': 158.00, 'salary': 5000.00, 'payment_date': date(2024, 7, 28), 'employee_id': 1},
+    {'total_work_hours': 158.50, 'salary': 5500.00, 'payment_date': date(2024, 7, 28), 'employee_id': 2},
+    {'total_work_hours': 159.00, 'salary': 6000.00, 'payment_date': date(2024, 7, 28), 'employee_id': 3},
+    {'total_work_hours': 157.75, 'salary': 4800.00, 'payment_date': date(2024, 7, 28), 'employee_id': 4},
+    {'total_work_hours': 159.50, 'salary': 5200.00, 'payment_date': date(2024, 7, 28), 'employee_id': 5},
+    {'total_work_hours': 158.75, 'salary': 5700.00, 'payment_date': date(2024, 7, 28), 'employee_id': 6},
 
     # June 2024 payroll
-    {'total_work_hours': 157.00, 'salary': 5000.00, 'net_salary': 4500.00, 'payment_date': date(2024, 6, 28), 'employee_id': 1},
-    {'total_work_hours': 157.50, 'salary': 5500.00, 'net_salary': 4950.00, 'payment_date': date(2024, 6, 28), 'employee_id': 2},
-    {'total_work_hours': 156.00, 'salary': 6000.00, 'net_salary': 5400.00, 'payment_date': date(2024, 6, 28), 'employee_id': 3},
-    {'total_work_hours': 157.25, 'salary': 4800.00, 'net_salary': 4320.00, 'payment_date': date(2024, 6, 28), 'employee_id': 4},
-    {'total_work_hours': 158.00, 'salary': 5200.00, 'net_salary': 4680.00, 'payment_date': date(2024, 6, 28), 'employee_id': 5},
-    {'total_work_hours': 159.00, 'salary': 5700.00, 'net_salary': 5130.00, 'payment_date': date(2024, 6, 28), 'employee_id': 6},
+    {'total_work_hours': 157.00, 'salary': 5000.00, 'payment_date': date(2024, 6, 28), 'employee_id': 1},
+    {'total_work_hours': 157.50, 'salary': 5500.00, 'payment_date': date(2024, 6, 28), 'employee_id': 2},
+    {'total_work_hours': 156.00, 'salary': 6000.00, 'payment_date': date(2024, 6, 28), 'employee_id': 3},
+    {'total_work_hours': 157.25, 'salary': 4800.00, 'payment_date': date(2024, 6, 28), 'employee_id': 4},
+    {'total_work_hours': 158.00, 'salary': 5200.00, 'payment_date': date(2024, 6, 28), 'employee_id': 5},
+    {'total_work_hours': 159.00, 'salary': 5700.00, 'payment_date': date(2024, 6, 28), 'employee_id': 6},
 ]
 
 
@@ -92,10 +93,6 @@ catagory_data = [
 for data in catagory_data:
     catagory = Catagory(**data)
     storage.new(catagory)  # Assuming `storage` is your session manager
-
-from datetime import datetime
-from models import storage
-from models.product import Product
 
 # Sample product data with varying types and categories
 product_data = [
