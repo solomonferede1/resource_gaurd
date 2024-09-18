@@ -11,7 +11,7 @@ from models.raw_material import RawMaterial
 app = Flask(__name__)
 
 
-@app.route('/home')
+@app.route('/home', strict_slashes=False)
 def home():
 
     all_employee = storage.all(Employee).values()
@@ -19,26 +19,45 @@ def home():
         return render_template('employee.html', all_employee=all_employee)
 
 
-@app.route('/employees')
-def employees():
+@app.route('/employees', strict_slashes=False)
+def employee():
 
     employees = storage.all(Employee).values()
     if employees:
         return render_template('employee.html', employees=employees)
 
-@app.route('/products')
-def products():
+
+@app.route('/add_employee', strict_slashes=False)
+def add_employee():
+
+    return render_template('add_employee.html')
+
+
+@app.route('/products', strict_slashes=False)
+def product():
 
     products= storage.all(Product).values()
     if products:
         return render_template('product.html', products=products)
 
-@app.route('/rawmaterials')
-def rawmaterials():
+@app.route('/rawmaterials', strict_slashes=False)
+def raw_material():
 
     raw_materials= storage.all(RawMaterial).values()
     if raw_materials:
         return render_template('raw_material.html', raw_materials=raw_materials)
+
+
+@app.route('/transactions', strict_slashes=False)
+def transaction():
+
+    return render_template('transaction.html')
+
+
+@app.route('/inventories', strict_slashes=False)
+def inventory():
+
+    return render_template('inventory.html')
 
 
 if __name__ == "__main__":
