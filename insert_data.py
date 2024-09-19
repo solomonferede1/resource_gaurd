@@ -26,7 +26,8 @@ employees = [
 # Loop through each employee and save them to the database
 for employee in employees:
     storage.new(employee)
-    storage.save()
+
+storage.save()
 
 attendances = [
     {'attendance_date': '2024-08-28', 'check_in_time': '2024-08-28 09:00:00', 'check_out_time': '2024-08-28 17:00:00', 'employee_id': 1},
@@ -46,6 +47,8 @@ for data in attendances:
         employee_id=data['employee_id']
     )
     storage.new(attendance)
+
+storage.save()
 
 
 # Example payroll data to insert
@@ -81,6 +84,8 @@ payroll_data = [
 for payroll in payroll_data:
     payroll_record = Payroll(**payroll)
     storage.new(payroll_record)
+
+storage.save()
 
 
 catagory_data = [
@@ -121,6 +126,7 @@ for product in product_data:
     new_product = Product(**product)
     storage.new(new_product)
 
+storage.save()
 
 suppliers_data = [
     {'name': 'ABC Electronics', 'contact_info': '0123456789', 'email': 'abc@electronics.com', 'address': '123 Main Street, City, Country'},
@@ -133,6 +139,7 @@ for supplier_data in suppliers_data:
     supplier = Supplier(**supplier_data)
     storage.new(supplier)
 
+storage.save()
 
 raw_materials_data = [
     {'material_name': 'Copper Wire', 'quantity': 5000, 'unit_price': 10.50, 'created_at': datetime(2024, 8, 1), 'updated_at': datetime(2024, 8, 1), 'supplier_id': 1},
@@ -148,7 +155,7 @@ for raw_material_data in raw_materials_data:
     raw_material = RawMaterial(**raw_material_data)
     storage.new(raw_material)
 
-
+storage.save()
 
 # Example data for product transactions
 product_transactions_data = [
@@ -166,6 +173,8 @@ for data in product_transactions_data:
     storage.new(transaction)
     storage.save()
 
+storage.save()
+
 # Example data for raw material transactions
 raw_material_transactions_data = [
     {'transaction_type': 'add', 'quantity': 500, 'transaction_date': datetime(2024, 8, 2, 9, 0), 'transaction_by_employee_id': 1, 'raw_material_id': 1},
@@ -180,7 +189,6 @@ raw_material_transactions_data = [
 for data in raw_material_transactions_data:
     transaction = RawMaterialTransaction(**data)
     storage.new(transaction)
-    storage.save()
 
 
 # Save the changes to the database
