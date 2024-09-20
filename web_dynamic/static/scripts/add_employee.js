@@ -11,6 +11,7 @@ $(document).ready(function() {
             email: $('input[placeholder="Email"]').val(),
             phone: $('input[placeholder="Phone"]').val(),
             role: $('input[placeholder="Role"]').val(),
+            salary: $('input[placeholder="salary"]').val(),
             /*password: $('input[placeholder="Password"]').val(),
             confirm_password: $('input[placeholder="Confirm Password"]').val(),
             gender: $('select[required]').val(),*/
@@ -33,7 +34,8 @@ $(document).ready(function() {
             data: JSON.stringify(employeeData),
             success: function(response) {
                 alert('Employee created successfully!');
-                // Optionally, redirect or clear form fields here
+                // redirect to employees page
+                window.location.href = 'http://localhost:5050/employees';
             },
             error: function(xhr, status, error) {
                 alert('Error: ' + xhr.responseJSON.description || 'An error occurred.');
