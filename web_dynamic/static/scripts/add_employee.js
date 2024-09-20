@@ -37,9 +37,9 @@ $(document).ready(function() {
                 // redirect to employees page
                 window.location.href = 'http://localhost:5050/employees';
             },
-            error: function(xhr, status, error) {
+            /*error: function(xhr, status, error) {
                 alert('Error: ' + xhr.responseJSON.description || 'An error occurred.');
-            }
+            }*/
         });
     });
 });
