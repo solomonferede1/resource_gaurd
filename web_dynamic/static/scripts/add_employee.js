@@ -35,9 +35,9 @@ $(document).ready(function() {
                 alert('Employee created successfully!');
                 // Optionally, redirect or clear form fields here
             },
-            /*error: function(xhr, status, error) {
-                alert('Error: ' + xhr.responseJSON.description || 'An error occurred.');
-            }*/
+            error: function(xhr, status, error) {
+                alert('Error: ' + (xhr.responseJSON.description || 'An error occurred.'));
+            }
         });
     });
 });
