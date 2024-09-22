@@ -18,7 +18,7 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#showcase">Screenshots</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="url_for('login')">Login</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -27,7 +27,7 @@
     <section class="hero">
         <h1>Effortlessly Manage Your Inventory and Resources</h1>
         <p>Stay in control of your raw materials, products, and employees.</p>
-        <a href="/signup" class="cta">Get Started Now</a>
+        <a href="{{ url_for('login') }}" class="cta">Get Started Now</a>
         <div class="search-bar">
             <input type="text" placeholder="Search products, Raw Materials">
         </div>
