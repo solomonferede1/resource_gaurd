@@ -1,0 +1,193 @@
+/* Basic Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #3d3636;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px 30px;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    background-image: url('/static/images/store.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 50px 20px;
+    height: fit-content;
+}
+
+.hero h1, .hero p {
+    display: block;
+    width: max-content;
+    background-color: #dde9f5; /* Background color of your choice */
+    color: rgb(3, 3, 3); /* Text color */
+    padding: 5px 10px; /* Add some padding for better readability */
+    border-radius: 5px; /* Optional: Rounded corners */
+    margin: 10px auto; /* Adjust spacing between elements */
+    font-size: 1.2em;
+}
+
+/* Features Section */
+#features {
+    padding: 50px 0;
+    background-color: #f8f9fa; /* Light background for contrast */
+    text-align: center;
+}
+
+#features h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.feature-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Allows wrapping of items on smaller screens */
+}
+
+.feature {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 300px; /* Fixed width for feature blocks */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    border-radius: 8px;
+    text-align: center;
+}
+
+.feature img.feature-avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: contain; /* Keeps the aspect ratio of icons */
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Showcase Section */
+#showcase {
+    padding: 50px 0;
+    background-color: #fff; /* White background */
+    text-align: center;
+}
+
+#showcase h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.showcase-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Allows wrapping of items on smaller screens */
+}
+
+.showcase-grid div {
+    width: 300px;
+    text-align: center;
+}
+
+.showcase-grid img.Screenshots-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.showcase-grid p {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Call to Action Section */
+.cta-section {
+    padding: 50px 0;
+    background-color: #007bff; /* Blue background for CTA */
+    color: #fff;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.cta-section .cta {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #007bff;
+    padding: 15px 30px;
+    font-size: 1.25rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cta-section .cta:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .feature-grid, .showcase-grid {
+        flex-direction: column; /* Stacks the items vertically on smaller screens */
+        align-items: center;
+    }
+}
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    display: inline;
+    margin: 0 10px;
+}

@@ -11,12 +11,11 @@ from models.raw_material import RawMaterial
 app = Flask(__name__)
 
 
+@app.route('/', strict_slashes=False)
 @app.route('/home', strict_slashes=False)
 def home():
 
-    all_employee = storage.all(Employee).values()
-    if all_employee:
-        return render_template('employee.html', all_employee=all_employee)
+    return render_template('langing.html')
 
 
 @app.route('/employees', strict_slashes=False)

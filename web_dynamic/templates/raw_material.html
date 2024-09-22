@@ -27,8 +27,8 @@
                         <th scope="col">Quantity</th>
                         <th scope="col">Unit Price</th>
                         <th scope="col">Supplier</th>
-                        <th>Actions</th>
                         <th scope="col">Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,12 +44,12 @@
                         {% else %}
                             <td>Present</td>
                         {% endif %}
+                        <td>
+                            <button class="btn btn-warning btn-sm">Edit</button>
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </td>
                     </tr>
                     {% endfor %}
-                    <td>
-                        <button class="btn btn-warning btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
                 </tbody>
             </table>
         </div>
