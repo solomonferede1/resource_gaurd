@@ -51,6 +51,16 @@ header nav ul li a {
     font-size: 1.2em;
 }
 
+.cta1 {
+    background-color: #28a745;
+    padding: 15px 30px;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 1.2em;
+}
+
 /* Features Section */
 #features {
     padding: 50px 0;

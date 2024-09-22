@@ -12,7 +12,9 @@
         <div class="product-container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="text-primary">Products</h2>
-                <button class="btn btn-primary">+ Add Product</button>
+                <a href="{{ url_for('add_product') }}">
+                    <button class="btn btn-primary">+ Add Product</button>
+                </a>
             </div>
             
             <div class="btn-group mb-4">
