@@ -139,7 +139,7 @@ header nav ul li a {
 /* Call to Action Section */
 .cta-section {
     padding: 50px 0;
-    background-color: #007bff; /* Blue background for CTA */
+    background-color: #eee348; /* Blue background for CTA */
     color: #fff;
     text-align: center;
 }
