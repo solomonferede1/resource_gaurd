@@ -71,14 +71,8 @@ ResourceGuard is a comprehensive web application designed to streamline resource
 ## Usage
 
 1. **Add Employees**: Use the Employee Management section to add and manage employee profiles and payroll.
-2. **Track Inventory**: Access Raw Material and Product Management to track inventory, purchase orders, and production processes.
+2. **Track Inventory**: Access Raw Material and Product Management to track inventory, and production processes.
 3. **Monitor Production**: View production reports and manage stock levels.
 
 ## Contributing
 Feel free to open issues or submit pull requests for improvements or bug fixes.
-
-## License
-This project is licensed under the MIT License.
-```
-
-This README uses GitHub-flavored Markdown to format the sections, code snippets, and directory descriptions for clarity. Copy this code into your `README.md` file in your repository, and it should render nicely on GitHub.
