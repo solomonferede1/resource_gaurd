@@ -43,11 +43,11 @@ header nav ul li a {
 .hero h1, .hero p {
     display: block;
     width: max-content;
-    background-color: #dde9f5; /* Background color of your choice */
-    color: rgb(3, 3, 3); /* Text color */
-    padding: 5px 10px; /* Add some padding for better readability */
-    border-radius: 5px; /* Optional: Rounded corners */
-    margin: 10px auto; /* Adjust spacing between elements */
+    background-color: #dde9f5;
+    color: rgb(3, 3, 3);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 10px auto;
     font-size: 1.2em;
 }
 
@@ -64,7 +64,7 @@ header nav ul li a {
 /* Features Section */
 #features {
     padding: 50px 0;
-    background-color: #f8f9fa; /* Light background for contrast */
+    background-color: #f8f9fa; 
     text-align: center;
 }
 
@@ -78,14 +78,14 @@ header nav ul li a {
     display: flex;
     justify-content: center;
     gap: 30px;
-    flex-wrap: wrap; /* Allows wrapping of items on smaller screens */
+    flex-wrap: wrap;
 }
 
 .feature {
     background-color: #ffffff;
     padding: 20px;
-    width: 300px; /* Fixed width for feature blocks */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
 }
@@ -93,7 +93,7 @@ header nav ul li a {
 .feature img.feature-avatar {
     width: 80px;
     height: 80px;
-    object-fit: contain; /* Keeps the aspect ratio of icons */
+    object-fit: contain;
     margin-bottom: 15px;
 }
 
@@ -111,7 +111,7 @@ header nav ul li a {
 /* Showcase Section */
 #showcase {
     padding: 50px 0;
-    background-color: #fff; /* White background */
+    background-color: #fff;
     text-align: center;
 }
 
@@ -125,7 +125,7 @@ header nav ul li a {
     display: flex;
     justify-content: center;
     gap: 30px;
-    flex-wrap: wrap; /* Allows wrapping of items on smaller screens */
+    flex-wrap: wrap; 
 }
 
 .showcase-grid div {
@@ -136,8 +136,8 @@ header nav ul li a {
 .showcase-grid img.Screenshots-image {
     width: 100%;
     height: auto;
-    border-radius: 8px; /* Optional: rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .showcase-grid p {
@@ -149,7 +149,7 @@ header nav ul li a {
 /* Call to Action Section */
 .cta-section {
     padding: 50px 0;
-    background-color: #eee348; /* Blue background for CTA */
+    background-color: #eee348;
     color: #fff;
     text-align: center;
 }
@@ -172,18 +172,9 @@ header nav ul li a {
 }
 
 .cta-section .cta:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
     color: #ffffff;
 }
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .feature-grid, .showcase-grid {
-        flex-direction: column; /* Stacks the items vertically on smaller screens */
-        align-items: center;
-    }
-}
-
 
 footer {
     background-color: #333;

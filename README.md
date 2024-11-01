@@ -57,7 +57,7 @@ ResourceGuard is a comprehensive web application designed to streamline resource
    ```
 4. Install required packages:
    ```bash
-   pip install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 5. Set up the MySQL database using `setup_mysql_rs.sql`.
 

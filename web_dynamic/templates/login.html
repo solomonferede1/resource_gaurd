@@ -1,31 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResourceGuard</title>
-</head>
-<body>
-    <main class="login-container">
-        <header class="header">ResourceGuard</header>
-        <section class="login-box">
-          <div class="login-content">
-            <div class="image-column">
-              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/aa7e425f77a424846e0cb5c695365f73927f46aa9c58daf0bc7d83c47ee168f4?placeholderIfAbsent=true&apiKey=47ca199aa7d749839b31d02607160675" class="login-image" alt="ResourceGuard login illustration" />
-            </div>
-            <div class="form-column">
-              <form class="login-form">
-                <h1 class="login-title">Login</h1>
-                <label for="username" class="visually-hidden">Username</label>
-                <input type="text" id="username" class="input-field" placeholder="Username" required />
-                <label for="password" class="visually-hidden">Password</label>
-                <input type="password" id="password" class="input-field" placeholder="Password" required />
-                <button type="submit" class="login-button">Login</button>
-              </form>
-            </div>
-          </div>
-        </section>
-        <footer class="footer">ResourceGuard</footer>
-      </main>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - ResourceGuard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/styles/login.css">
+    </head>
+    <body>
+        <div class="content-section">
+            <!-- Image at the top -->
+            <img src="../static/images/login.png" alt="ResourceGuard login illustration" class="login-image"" />
+
+            <form method="post" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Login</legend>
+                    <div class="form-group">
+                        {{ form.email.label(class="form-control-label") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class="form-control-label") }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-check">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
+                    </div>                                       
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info btn-lg btn-block") }}
+                </div>
+                <small class="text-muted">
+                    <a href="#">Forget Your Password?</a>
+                </small>
+            </form>    
+        </div>
+
+        <div class="border-top pt-3">
+            <small>
+                Need an account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+            </small>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>
