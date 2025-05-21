@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Employee"""
+"""Main application file defining routes """
 
 
 from flask import Flask, render_template, flash, redirect, url_for
