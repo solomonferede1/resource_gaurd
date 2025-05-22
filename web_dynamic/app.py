@@ -2,7 +2,7 @@
 """Main application file defining routes """
 
 
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, render_template, flash, redirect, url_for, request
 from models import storage
 from models.employee import Employee
 from models.product import Product
@@ -10,6 +10,7 @@ from models.raw_material import RawMaterial
 from models.catagory import Catagory
 from models.supplier import Supplier
 from web_dynamic.forms import RegistrationForm, LoginForm
+from math import ceil
 
 
 app = Flask(__name__)
@@ -47,10 +48,71 @@ def login():
 
 @app.route('/employees', strict_slashes=False)
 def employee():
+    # Pagination parameters
+    page = request.args.get('page', 1, type=int)
+    per_page = 10  # Items per page
+    
+    # Sorting parameters
+    sort_by = request.args.get('sort_by', 'first_name')
+    sort_order = request.args.get('sort_order', 'asc')
+    
+    # Filter parameters
+    department = request.args.get('department', '')
+    search_term = request.args.get('search', '')
+    
+    # Get all employees
+    all_employees = storage.all(Employee).values()
+    
+    # Apply filters
+    filtered_employees = []
+    for emp in all_employees:
+        # Department filter
+        if department and emp.department != department:
+            continue
+            
+        # Search filter (name, email, or role)
+        if search_term:
+            search_lower = search_term.lower()
+            if not (search_lower in emp.first_name.lower() or 
+                    search_lower in emp.last_name.lower() or 
+                    search_lower in emp.email.lower() or 
+                    search_lower in emp.role.lower()):
+                continue
+                
+        filtered_employees.append(emp)
+    
+    # Apply sorting
+    reverse_order = (sort_order == 'desc')
+    filtered_employees.sort(
+        key=lambda x: getattr(x, sort_by, x.first_name),
+        reverse=reverse_order
+    )
 
-    employees = storage.all(Employee).values()
-    if employees:
-        return render_template('employee.html', employees=employees)
+    # Pagination logic
+    total_employees = len(filtered_employees)
+    total_pages = ceil(total_employees / per_page)
+    start_idx = (page - 1) * per_page
+    end_idx = start_idx + per_page
+    paginated_employees = filtered_employees[start_idx:end_idx]
+    
+    return render_template(
+        'employee.html',
+        employees=paginated_employees,
+        pagination={
+            'page': page,
+            'per_page': per_page,
+            'total_pages': total_pages,
+            'total_items': total_employees,
+            'has_prev': page > 1,
+            'has_next': page < total_pages,
+            'prev_num': page - 1,
+            'next_num': page + 1,
+        },
+        current_sort=sort_by,
+        current_order=sort_order,
+        current_department=department,
+        current_search=search_term
+    )
 
 
 @app.route('/add_employee', strict_slashes=False)

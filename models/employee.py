@@ -13,9 +13,9 @@ class Employee(BaseModel, Base):
 
     __tablename__ = 'employees'
 
-    first_name = Column(String(60))
-    last_name = Column(String(60))
-    role = Column(String(60))
+    first_name = Column(String(60), nullable=False)
+    last_name = Column(String(60), nullable=False)
+    role = Column(String(60), default='employee')
     email = Column(String(60), unique=True, nullable=True)
     phone = Column(String(60), unique=True, nullable=False)
     salary = Column(Numeric(10, 2))
