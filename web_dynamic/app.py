@@ -39,7 +39,7 @@ def login():
     if form.validate_on_submit():
         if form.email.data == 'admin@gmail.com' and form.password.data == 'password':
             flash(f'You have been loged in', 'success')
-            return redirect(url_for('inventory'))
+            return redirect(url_for('employee'))
         else:
             flash(f'Login unsecussful, please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
