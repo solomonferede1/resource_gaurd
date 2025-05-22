@@ -114,6 +114,9 @@ def employee():
         current_search=search_term
     )
 
+@app.route('/get_edit_form')
+def get_edit_form():
+    return render_template('edit_employee_form.html')
 
 @app.route('/add_employee', strict_slashes=False)
 def add_employee():

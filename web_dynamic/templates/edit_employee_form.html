@@ -1,0 +1,71 @@
+<form id="editEmployeeForm">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" required>
+        </div>
+        <div class="col-md-6">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" required>
+        </div>
+        
+        <div class="col-md-6">
+            <label class="form-label">Gender</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" checked>
+                <label class="form-check-label" for="genderMale">Male</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female">
+                <label class="form-check-label" for="genderFemale">Female</label>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+        </div>
+        
+        <div class="col-md-6">
+            <label for="department" class="form-label">Department</label>
+            <select class="form-select" id="department" name="department">
+                <option value="Production">Production</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Administrative">Administrative</option>
+                <option value="Maintenance">Maintenance</option>
+            </select>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="role" class="form-label">Role</label>
+            <input type="text" class="form-control" id="role" name="role" required>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="salary" class="form-label">Salary (ETB)</label>
+            <input type="number" class="form-control" id="salary" name="salary" min="0" step="0.01">
+        </div>
+        
+        <div class="col-md-6">
+            <label for="date_hired" class="form-label">Hire Date</label>
+            <input type="date" class="form-control" id="date_hired" name="date_hired">
+        </div>
+        
+        <div class="col-md-6">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="is_active" name="is_active">
+                <label class="form-check-label" for="is_active">Active Employee</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-orange">Save Changes</button>
+    </div>
+</form>

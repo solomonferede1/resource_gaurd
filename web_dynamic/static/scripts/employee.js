@@ -27,13 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
     departmentFilter.addEventListener('change', applyFilters);
 });
 
+
 // View Employee Modal
 function viewEmployee(id) {
-    fetch(`/api/employees/${id}`)
+    fetch(`${API_BASE_URL}/api/v1/employees/${id}`)
         .then(response => response.json())
         .then(data => {
             const modal = new bootstrap.Modal(document.getElementById('viewEmployeeModal'));
-            const modalContent = `
+
+            const modalInnerContent = `
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -85,26 +87,161 @@ function viewEmployee(id) {
                     </div>
                 </div>
             `;
-            document.getElementById('viewEmployeeModal').innerHTML = modalContent;
+
+            document.getElementById('viewEmployeeContent').innerHTML = modalInnerContent;
             modal.show();
         })
         .catch(error => console.error('Error:', error));
 }
 
-function editEmployee(id) {
-    window.location.href = `/employees/edit/${id}`;
-}
+
+// Delete Employee Functionality
+let currentEmployeeToDelete = null;
 
 function confirmDelete(id) {
-    if (confirm('Are you sure you want to delete this employee?')) {
-        fetch(`/api/employees/${id}`, {
-            method: 'DELETE'
-        })
-        .then(response => {
-            if (response.ok) {
-                location.reload();
+    currentEmployeeToDelete = id;
+    const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+    modal.show();
+}
+
+// Setup delete confirmation button
+document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+    if (!currentEmployeeToDelete) return;
+
+
+    fetch(`${API_BASE_URL}/api/v1/employees/${currentEmployeeToDelete}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            // Show success toast
+            const toast = new bootstrap.Toast(document.getElementById('deleteSuccessToast'));
+            toast.show();
+            
+            // Remove the deleted row from table
+            const row = document.querySelector(`tr[data-employee-id="${currentEmployeeToDelete}"]`);
+            if (row) {
+                row.classList.add('fade-out');
+                setTimeout(() => row.remove(), 300);
             }
-        })
-        .catch(error => console.error('Error:', error));
+            
+            // Close the confirmation modal
+            bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
+        } else {
+            throw new Error('Failed to delete employee');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to delete employee. Please try again.');
+    })
+    .finally(() => {
+        currentEmployeeToDelete = null;
+    });
+});
+
+
+async function editEmployee(id) {
+    try {
+        // Fetch employee data
+        const response = await fetch(`${API_BASE_URL}/api/v1/employees/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch employee');
+        const employee = await response.json();
+
+        // Load edit form template
+        const formResponse = await fetch('/get_edit_form');
+        const formHtml = await formResponse.text();
+        
+        // Populate form with employee data
+        const container = document.getElementById('editEmployeeFormContainer');
+        container.innerHTML = formHtml;
+        populateForm(employee);
+
+        // Initialize modal
+        const modal = new bootstrap.Modal(document.getElementById('editEmployeeModal'));
+        modal.show();
+
+        // Setup form submission
+        document.getElementById('editEmployeeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await updateEmployee(id);
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to load employee data');
     }
+}
+
+function populateForm(employee) {
+    const form = document.getElementById('editEmployeeForm');
+    for (const [key, value] of Object.entries(employee)) {
+        const input = form.querySelector(`[name="${key}"]`);
+        if (input) {
+            if (input.type === 'checkbox') {
+                input.checked = value;
+            } else {
+                input.value = value;
+            }
+        }
+    }
+}
+
+async function updateEmployee(id) {
+    try {
+        const form = document.getElementById('editEmployeeForm');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        const response = await fetch(`${API_BASE_URL}/api/v1/employees/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) throw new Error('Failed to update employee');
+
+        const updatedEmployee = await response.json();
+        
+        // Show success toast
+        const toast = new bootstrap.Toast(document.getElementById('editSuccessToast'));
+        toast.show();
+
+        // Update the table row
+        updateEmployeeRow(id, updatedEmployee);
+
+        // Close modal
+        bootstrap.Modal.getInstance(document.getElementById('editEmployeeModal')).hide();
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to update employee');
+    }
+}
+
+function updateEmployeeRow(id, employee) {
+
+    const row = document.querySelector(`tr[data-employee-id="${id}"]`);
+    if (!row) return;
+
+    // Highlight the updated row
+    row.classList.add('updated-row');
+    setTimeout(() => row.classList.remove('updated-row'), 1500);
+
+    // Update each cell with new data
+    row.cells[1].textContent = `${employee.first_name} ${employee.last_name}`;
+    row.cells[2].innerHTML = employee.gender === 'Male' ? 
+        '<i class="fas fa-mars" style="color: #3498db;"></i> Male' : 
+        '<i class="fas fa-venus" style="color: #e83e8c;"></i> Female';
+    row.cells[3].textContent = employee.role;
+    row.cells[4].textContent = employee.department;
+    row.cells[5].textContent = `ETB ${(employee.salary || 0).toLocaleString()}`;
+    row.cells[6].textContent = employee.date_hired ? 
+        new Date(employee.date_hired).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : 
+        'N/A';
+    row.cells[7].innerHTML = `<span class="status-badge status-${employee.is_active ? 'active' : 'inactive'}">
+        ${employee.is_active ? 'Active' : 'Inactive'}
+    </span>`;
 }

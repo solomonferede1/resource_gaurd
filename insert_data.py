@@ -13,15 +13,30 @@ from models.raw_material_transaction import RawMaterialTransaction
 from datetime import date, datetime
 
 
-# List of Employee objects
+# Expanded list of 20 Employee objects with departments
 employees = [
-    Employee(first_name="John", last_name="Doe", email="john.doe@example.com", phone="1234567890", salary=5000),
-    Employee(first_name="Jane", last_name="Smith", email="jane.smith@example.com", phone="0987654321", salary=5500),
-    Employee(first_name="Michael", last_name="Johnson", email="michael.johnson@example.com", phone="1122334455", salary=6000),
-    Employee(first_name="Emily", last_name="Davis", email="emily.davis@example.com", phone="2233445566", salary=4800),
-    Employee(first_name="Chris", last_name="Brown", email="chris.brown@example.com", phone="3344556677", salary=5200),
-    Employee(first_name="Olivia", last_name="Taylor", email="olivia.taylor@example.com", phone="4455667788", salary=5700)
+    Employee(first_name="John", last_name="Doe", email="john.doe@example.com", phone="1234567890", salary=5000, department="Production"),
+    Employee(first_name="Jane", last_name="Smith", email="jane.smith@example.com", phone="0987654321", salary=5500, department="Maintenance"),
+    Employee(first_name="Michael", last_name="Johnson", email="michael.johnson@example.com", phone="1122334455", salary=6000, department="Engineering"),
+    Employee(first_name="Emily", last_name="Davis", email="emily.davis@example.com", phone="2233445566", salary=4800, department="Administrative"),
+    Employee(first_name="Chris", last_name="Brown", email="chris.brown@example.com", phone="3344556677", salary=5200, department="Production"),
+    Employee(first_name="Olivia", last_name="Taylor", email="olivia.taylor@example.com", phone="4455667788", salary=5700, department="Maintenance"),
+    Employee(first_name="Daniel", last_name="Wilson", email="daniel.wilson@example.com", phone="5566778899", salary=5300, department="Engineering"),
+    Employee(first_name="Sophia", last_name="Martinez", email="sophia.martinez@example.com", phone="6677889900", salary=4900, department="Administrative"),
+    Employee(first_name="David", last_name="Anderson", email="david.anderson@example.com", phone="7788990011", salary=5100, department="Production"),
+    Employee(first_name="Emma", last_name="Thomas", email="emma.thomas@example.com", phone="8899001122", salary=5600, department="Maintenance"),
+    Employee(first_name="James", last_name="Jackson", email="james.jackson@example.com", phone="9900112233", salary=6200, department="Engineering"),
+    Employee(first_name="Ava", last_name="White", email="ava.white@example.com", phone="1011121314", salary=4700, department="Administrative"),
+    Employee(first_name="William", last_name="Harris", email="william.harris@example.com", phone="1112131415", salary=5400, department="Production"),
+    Employee(first_name="Mia", last_name="Clark", email="mia.clark@example.com", phone="1213141516", salary=5800, department="Maintenance"),
+    Employee(first_name="Joseph", last_name="Lewis", email="joseph.lewis@example.com", phone="1314151617", salary=6000, department="Engineering"),
+    Employee(first_name="Isabella", last_name="Lee", email="isabella.lee@example.com", phone="1415161718", salary=4900, department="Administrative"),
+    Employee(first_name="Benjamin", last_name="Walker", email="benjamin.walker@example.com", phone="1516171819", salary=5200, department="Production"),
+    Employee(first_name="Charlotte", last_name="Hall", email="charlotte.hall@example.com", phone="1617181920", salary=5700, department="Maintenance"),
+    Employee(first_name="Ethan", last_name="Allen", email="ethan.allen@example.com", phone="1718192021", salary=6100, department="Engineering"),
+    Employee(first_name="Amelia", last_name="Young", email="amelia.young@example.com", phone="1819202122", salary=4800, department="Administrative")
 ]
+
 
 # Loop through each employee and save them to the database
 for employee in employees:
