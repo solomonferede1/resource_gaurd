@@ -94,52 +94,75 @@ function viewEmployee(id) {
         .catch(error => console.error('Error:', error));
 }
 
-
 // Delete Employee Functionality
 let currentEmployeeToDelete = null;
 
+// Initialize modal
+const deleteModal = new bootstrap.Modal('#deleteConfirmModal', {
+    keyboard: false,
+    focus: true
+});
+
 function confirmDelete(id) {
     currentEmployeeToDelete = id;
-    const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
-    modal.show();
+    
+    // Remove aria-hidden before showing
+    document.getElementById('deleteConfirmModal').removeAttribute('aria-hidden');
+    deleteModal.show();
+    
+    // Set focus to delete button after showing
+    setTimeout(() => {
+        document.getElementById('confirmDeleteBtn').focus();
+    }, 100);
 }
 
-// Setup delete confirmation button
+// Handle delete confirmation
 document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
     if (!currentEmployeeToDelete) return;
-
 
     fetch(`${API_BASE_URL}/api/v1/employees/${currentEmployeeToDelete}`, {
         method: 'DELETE'
     })
     .then(response => {
         if (response.ok) {
-            // Show success toast
-            const toast = new bootstrap.Toast(document.getElementById('deleteSuccessToast'));
-            toast.show();
-            
-            // Remove the deleted row from table
-            const row = document.querySelector(`tr[data-employee-id="${currentEmployeeToDelete}"]`);
-            if (row) {
-                row.classList.add('fade-out');
-                setTimeout(() => row.remove(), 300);
-            }
-            
-            // Close the confirmation modal
-            bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
+            showDeleteSuccess();
+            removeEmployeeRow(currentEmployeeToDelete);
         } else {
             throw new Error('Failed to delete employee');
         }
     })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Failed to delete employee. Please try again.');
-    })
-    .finally(() => {
-        currentEmployeeToDelete = null;
-    });
+    .catch(handleDeleteError)
+    .finally(resetDeleteState);
 });
 
+function showDeleteSuccess() {
+    const toast = new bootstrap.Toast('#deleteSuccessToast');
+    toast.show();
+}
+
+function removeEmployeeRow(employeeId) {
+    const row = document.querySelector(`tr[data-employee-id="${employeeId}"]`);
+    if (row) {
+        row.classList.add('fade-out');
+        setTimeout(() => row.remove(), 300);
+    }
+}
+
+function handleDeleteError(error) {
+    console.error('Error:', error);
+    alert('Failed to delete employee. Please try again.');
+}
+
+function resetDeleteState() {
+    currentEmployeeToDelete = null;
+    // Ensure modal is properly hidden
+    document.getElementById('deleteConfirmModal').setAttribute('aria-hidden', 'true');
+}
+
+// Ensure proper cleanup when modal hides
+document.getElementById('deleteConfirmModal').addEventListener('hidden.bs.modal', function() {
+    resetDeleteState();
+});
 
 async function editEmployee(id) {
     try {
