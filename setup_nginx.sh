@@ -22,9 +22,10 @@ server {
         proxy_pass http://127.0.0.1:5050/;
     }
 
-    # Serve static assets (optional if handled by Flask/Gunicorn)
+    # Serve static assets from your actual path
     location /static/ {
-        alias /path/to/your/static/files/;
+        alias /home/ubuntu/resource_gaurd/static/;
+        expires 30d;
     }
 }
 EOF'
@@ -32,7 +33,11 @@ EOF'
 # Enable the configuration
 sudo ln -s /etc/nginx/sites-available/creativeaddis.tech /etc/nginx/sites-enabled/
 
+# Set proper permissions for static files
+sudo chown -R www-data:www-data /home/ubuntu/resource_gaurd/static
+sudo chmod -R 755 /home/ubuntu/resource_gaurd/static
+
 # Test configuration and restart Nginx
 sudo nginx -t && sudo systemctl restart nginx
 
-echo "Nginx installed and configured for www.creativeaddis.tech"
+echo "Nginx configured with static files from /home/ubuntu/resource_gaurd/static"
