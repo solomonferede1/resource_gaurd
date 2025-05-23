@@ -24,7 +24,7 @@ server {
 
     # Serve static assets from your actual path
     location /static/ {
-        alias /home/ubuntu/resource_gaurd/static/;
+        alias /home/ubuntu/resource_gaurd/web_dynamics/static/;
         expires 30d;
     }
 }
