@@ -45,7 +45,6 @@ def login():
             flash(f'Login unsecussful, please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-
 @app.route('/employees', strict_slashes=False)
 def employee():
     # Pagination parameters
@@ -95,6 +94,24 @@ def employee():
     end_idx = start_idx + per_page
     paginated_employees = filtered_employees[start_idx:end_idx]
     
+    # Generate page numbers for pagination
+    left_edge = 2
+    left_current = 2
+    right_current = 5
+    right_edge = 2
+    
+    page_numbers = []
+    last_page = 0
+    
+    for num in range(1, total_pages + 1):
+        if (num <= left_edge or 
+            (num > page - left_current - 1 and num < page + right_current) or 
+            num > total_pages - right_edge):
+            if last_page + 1 != num:
+                page_numbers.append(None)  # Ellipsis marker
+            page_numbers.append(num)
+            last_page = num
+    
     return render_template(
         'employee.html',
         employees=paginated_employees,
@@ -107,6 +124,8 @@ def employee():
             'has_next': page < total_pages,
             'prev_num': page - 1,
             'next_num': page + 1,
+            'iter_pages': page_numbers,
+            'current_page': page
         },
         current_sort=sort_by,
         current_order=sort_order,
