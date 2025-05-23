@@ -1,65 +1,91 @@
-{% extends 'base.html' %}
-
-{% block title %}Add Product{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="../static/styles/add_product.css">
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %}Add Product{% endblock %} {% block
+extra_css %}
+<link rel="stylesheet" href="../static/styles/add_product.css" />
+{% endblock %} {% block content %}
 <!-- Main Content -->
 <main class="col-md-10">
-    <div class="d-flex justify-content-center">
-        <div class="form-container">
-            <h2 class="text-center">Add Product</h2>
-            <hr>
-            <br>
-            <form id="productForm">
-                <!-- Step 1: Select Product Category -->
-                <div class="mb-3">
-                    <label for="category">Select Product Category:</label>
-                    <select class="form-control" id="category" required>
-                        <option value="" disabled selected>Select Catagory</option>
-                        {% for catagory in catagories %}
-                        <option value="{{ catagory.id }}">{{ catagory.catagory_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                
-                <!-- Step 2: Product Details (Hidden Initially) -->
-                <div id="productDetails" style="display: none;">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="productName" placeholder="Product Name" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <input type="number" class="form-control" id="quantity" placeholder="Quantity" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <input type="number" step="0.01" class="form-control" id="unitPrice" placeholder="Unit Price" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="productType" placeholder="Product Type" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="date" class="form-control" id="productionDate" placeholder="Production Date" required>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Add Product</button>
-                    </div>
-                </div>
-            </form>
+  <div class="d-flex justify-content-center">
+    <div class="form-container">
+      <h2 class="text-center">Add Product</h2>
+      <hr />
+      <br />
+      <form id="productForm">
+        <!-- Step 1: Select Product Category -->
+        <div class="mb-3">
+          <label for="category">Select Product Category:</label>
+          <select class="form-control" id="category" required>
+            <option value="" disabled selected>Select Catagory</option>
+            {% for catagory in catagories %}
+            <option value="{{ catagory.id }}">
+              {{ catagory.catagory_name }}
+            </option>
+            {% endfor %}
+          </select>
         </div>
-    </div>
-</main>
-{% endblock %}
 
-{% block extra_js %}
+        <!-- Step 2: Product Details (Hidden Initially) -->
+        <div id="productDetails" style="display: none">
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="productName"
+              placeholder="Product Name"
+              required
+            />
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quantity"
+                  placeholder="Quantity"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <input
+                  type="number"
+                  step="0.01"
+                  class="form-control"
+                  id="unitPrice"
+                  placeholder="Unit Price"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="productType"
+              placeholder="Product Type"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="date"
+              class="form-control"
+              id="productionDate"
+              placeholder="Production Date"
+              required
+            />
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Add Product</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %} {% block extra_js %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ url_for('static', filename='scripts/add_product.js') }}"></script>
 {% endblock %}

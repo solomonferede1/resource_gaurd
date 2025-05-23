@@ -33,11 +33,18 @@ class DBStorage:
 
     def __init__(self):
         '''Initialization'''
+        
 
-        MYSQL_USER = os.environ.get('MYSQL_USER')
-        MYSQL_PWD = os.environ.get('MYSQL_PWD')
-        MYSQL_HOST = os.environ.get('MYSQL_HOST')
-        MYSQL_DB = os.environ.get('MYSQL_DB')
+        MYSQL_USER = os.environ.get('MYSQL_USER', 'RG_USER')
+        MYSQL_PWD = os.environ.get('MYSQL_PWD', 'RG_PASSWORD')
+        MYSQL_HOST = os.environ.get('MYSQL_HOST', 'localhost')
+        MYSQL_DB = os.environ.get('MYSQL_DB', 'RG_DB')
+
+        # Optional: other environment variables
+        RG_API_HOST = os.environ.get('RG_API_HOST', '0.0.0.0')
+        RG_API_PORT = os.environ.get('RG_API_PORT', '5000')
+        RG_WEB_PORT = os.environ.get('RG_WEB_PORT', '5050')
+
 
         url = f'mysql+mysqldb://{MYSQL_USER}:{MYSQL_PWD}@{MYSQL_HOST}/{MYSQL_DB}'
         self.__engine = create_engine(url, echo=False)
