@@ -30,7 +30,6 @@
           name="gender"
           id="genderMale"
           value="Male"
-          checked
         />
         <label class="form-check-label" for="genderMale">Male</label>
       </div>
@@ -64,7 +63,7 @@
 
     <div class="col-md-6">
       <label for="department" class="form-label">Department</label>
-      <select class="form-select" id="department" name="department">
+      <select class="form-select" id="department" name="department" required>
         <option value="Production">Production</option>
         <option value="Engineering">Engineering</option>
         <option value="Administrative">Administrative</option>
@@ -86,6 +85,7 @@
         name="salary"
         min="0"
         step="0.01"
+        required
       />
     </div>
 
@@ -96,6 +96,7 @@
         class="form-control"
         id="date_hired"
         name="date_hired"
+        required
       />
     </div>
 
@@ -112,7 +113,7 @@
     </div>
   </div>
 
-  <div class="modal-footer">
+  <div class="modal-footer mt-3">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
       Cancel
     </button>
