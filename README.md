@@ -103,8 +103,9 @@ resource_gaurd/
 
 Configure environment variables and start the app:
 
-``bash
-./run.sh```
+```bash
+./run.sh
+```
 
 ## Access the application in your browser:
 
