@@ -1,12 +1,8 @@
-Here's a well-structured `README.md` file for your ResourceGuard project:
-
-```markdown
 # ResourceGuard
 
 Empowering efficiency and precision in manufacturing resource management.
 
-![ResourceGuard Banner](https://via.placeholder.com/800x200?text=ResourceGuard+Banner)
-_(Consider adding an actual banner image here)_
+![Dashboard](web_dynamic/static/images/dashboard.png)
 
 ## Project Overview
 
@@ -41,6 +37,7 @@ ResourceGuard is a comprehensive web application designed to streamline resource
 - **Deployment**: ALX environment
 
 ## Project Structure
+
 ```
 
 resource_gaurd/
@@ -59,11 +56,12 @@ resource_gaurd/
 └── setup_mysql_rs.sql # Database setup script
 └── insert_dummy_data.py # New dummy data insertion script
 
-````
+```
 
 ## Installation Guide
 
 ### Prerequisites
+
 - Python 3.8+
 - MySQL 5.7+
 - Git
@@ -71,10 +69,11 @@ resource_gaurd/
 ### Setup Instructions
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/solomonferede1/resource_gaurd.git
    cd resource_gaurd
-````
+   ```
 
 2. **Set up virtual environment**:
 
@@ -100,40 +99,18 @@ resource_gaurd/
    python3 insert_dummy_data.py
    ```
 
-````
-
 ## Running the Application
 
 Configure environment variables and start the app:
 
 ``bash
 ./run.sh```
+
 ## Access the application in your browser:
 
 - API: http://localhost:5000
 
 - Web UI: http://localhost:5050
-
-
-### Development Mode
-
-```bash
-export FLASK_APP=web_flask/app.py
-export FLASK_ENV=development
-flask run
-````
-
-### Production Mode (using run.sh)
-
-```bash
-chmod +x run.sh
-./run.sh
-```
-
-The application will be available at:
-
-- API: `http://localhost:5000`
-- Web Interface: `http://localhost:5050`
 
 ## Usage Guide
 
@@ -160,15 +137,9 @@ We welcome contributions! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
-
 ## Contact
 
 For support or questions, please contact:
 
-- Solomon Ferede - solomonferede1@email.com
+- Solomon Ferede - ezezsolomonferede@gmail.com
 - Project Link: [https://github.com/solomonferede1/resource_gaurd](https://github.com/solomonferede1/resource_gaurd)
-
-```
-
-```
