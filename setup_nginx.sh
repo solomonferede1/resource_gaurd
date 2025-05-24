@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Nginx (with -y for automatic yes)
+# Install Nginx
 sudo apt-get update
 sudo apt-get install -y nginx
 
@@ -21,21 +21,11 @@ server {
         include proxy_params;
         proxy_pass http://127.0.0.1:5050/;
     }
-
-    # Serve static assets from your actual path
-    location /static/ {
-        alias /home/ubuntu/resource_gaurd/web_dynamics/static/;
-        expires 30d;
-    }
 }
 EOF'
 
 # Enable the configuration
 sudo ln -s /etc/nginx/sites-available/creativeaddis.tech /etc/nginx/sites-enabled/
-
-# Set proper permissions for static files
-sudo chown -R www-data:www-data /home/ubuntu/resource_gaurd/static
-sudo chmod -R 755 /home/ubuntu/resource_gaurd/static
 
 # Test configuration and restart Nginx
 sudo nginx -t && sudo systemctl restart nginx

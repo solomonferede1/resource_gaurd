@@ -1,0 +1,11 @@
+# System Packages (to be installed with apt)
+# These should be installed before running pip:
+# sudo apt install git mysql-server python3-pip pkg-config python3-dev libmysqlclient-dev zlib1g-dev
+
+# Python package requirements
+mysqlclient==2.0.*
+SQLAlchemy>=1.4.0
+gunicorn>=20.0.0
+Flask>=2.0.0
+Flask-CORS>=3.0.0
+Flask-WTF>=1.0.0

@@ -1,4 +1,4 @@
--- prepares a MySQL server for the project
+-- prepares a MySQL server for the ResourceGuard
 
 
 -- Environment variables
