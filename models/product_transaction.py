@@ -14,7 +14,7 @@ class ProductTransaction(BaseModel, Base):
     transaction_type = Column(Enum('add', 'withdraw', name='transaction_type_enum'), nullable=False)
     quantity = Column(Integer, nullable=False)
     transaction_date = Column(DateTime, nullable=False, default=datetime.utcnow)
-    transaction_by_employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
+    transaction_by_employee_id = Column(Integer, ForeignKey('employees.id'), nullable=True)
     product_id = Column(Integer, ForeignKey('products.id'), nullable=False)
 
 

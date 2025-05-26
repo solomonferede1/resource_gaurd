@@ -1,1 +1,1 @@
-const API_BASE_URL = "www.creativeaddis.tech:5000";
+const API_BASE_URL = "http://localhost:5000";
