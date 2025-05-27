@@ -5,7 +5,7 @@
 from datetime import datetime
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Numeric, DateTime
-from sqlalchemy.orm import relationship 
+from sqlalchemy.orm import relationship, backref
 
 
 class Employee(BaseModel, Base):
@@ -31,9 +31,13 @@ class Employee(BaseModel, Base):
                               backref="employee",
                               cascade="all, delete, delete-orphan")
 
-    product_transactions = relationship('ProductTransaction', backref='employee')
+    product_transactions = relationship('ProductTransaction',
+                                        backref=backref('employee', passive_deletes=True),
+                                        cascade="save-update, merge")
 
-    raw_material_transactions = relationship('RawMaterialTransaction', backref='employee')
+    raw_material_transactions = relationship('RawMaterialTransaction',
+                                             backref=backref('employee', passive_deletes=True),
+                                             cascade="save-update, merge")
 
 
     def __init__(self, *args, **kwargs):
