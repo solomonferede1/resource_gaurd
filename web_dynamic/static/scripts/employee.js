@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // View Employee Modal
 function viewEmployee(id) {
-  fetch(`${API_BASE_URL}/api/v1/employees/${id}`)
+  fetch(`/api/v1/employees/${id}`)
     .then((response) => {
       if (!response.ok) throw new Error("Failed to fetch employee");
       return response.json();
@@ -143,7 +143,7 @@ document
   .addEventListener("click", function () {
     if (!currentEmployeeToDelete) return;
 
-    fetch(`${API_BASE_URL}/api/v1/employees/${currentEmployeeToDelete}`, {
+    fetch(`/api/v1/employees/${currentEmployeeToDelete}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -178,7 +178,7 @@ function removeEmployeeRow(employeeId) {
 async function editEmployee(id) {
   try {
     // Fetch employee data
-    const response = await fetch(`${API_BASE_URL}/api/v1/employees/${id}`);
+    const response = await fetch(`/api/v1/employees/${id}`);
     if (!response.ok) throw new Error("Failed to fetch employee");
     const employee = await response.json();
 
@@ -247,7 +247,7 @@ async function updateEmployee(id) {
     // Convert is_active to boolean
     data.is_active = data.is_active === "on";
 
-    const response = await fetch(`${API_BASE_URL}/api/v1/employees/${id}`, {
+    const response = await fetch(`/api/v1/employees/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
