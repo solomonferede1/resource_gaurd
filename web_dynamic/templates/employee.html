@@ -106,8 +106,8 @@
                 <td>ETB {{ "{:,.2f}".format(employee.salary or 0) }}</td>
                 <td>{{ employee.date_hired.strftime('%d %b %Y') if employee.date_hired else 'N/A' }}</td>
                 <td>
-                    <span class="status-badge status-{{ 'active' if employee.is_active else 'inactive' }}">
-                        {{ 'Active' if employee.is_active else 'Inactive' }}
+                    <span class="status-badge status-{{ employee.status }}">
+                        {{ employee.status.capitalize() }}
                     </span>
                 </td>
                 <td class="action-buttons">

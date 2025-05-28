@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // View Employee Modal
 function viewEmployee(id) {
-  fetch(`/api/v1/employees/${id}`)
+  fetch(`${API_BASE_URL}/api/v1/employees/${id}`)
     .then((response) => {
       if (!response.ok) throw new Error("Failed to fetch employee");
       return response.json();
@@ -92,14 +92,13 @@ function viewEmployee(id) {
                                 <div class="col-12">
                                     <h5>Additional Information</h5>
                                     <p><strong>Status:</strong> 
-                                        <span class="status-badge status-${
-                                          data.is_active ? "active" : "inactive"
-                                        }">
-                                            ${
-                                              data.is_active
-                                                ? "Active"
-                                                : "Inactive"
-                                            }
+                                       <span class="status-badge status-${
+                                         data.status
+                                       }">
+                                        ${
+                                          data.status.charAt(0).toUpperCase() +
+                                          data.status.slice(1)
+                                        }
                                         </span>
                                     </p>
                                     <p><strong>Gender:</strong> ${
@@ -143,7 +142,7 @@ document
   .addEventListener("click", function () {
     if (!currentEmployeeToDelete) return;
 
-    fetch(`/api/v1/employees/${currentEmployeeToDelete}`, {
+    fetch(`${API_BASE_URL}/api/v1/employees/${currentEmployeeToDelete}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -178,7 +177,7 @@ function removeEmployeeRow(employeeId) {
 async function editEmployee(id) {
   try {
     // Fetch employee data
-    const response = await fetch(`/api/v1/employees/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/v1/employees/${id}`);
     if (!response.ok) throw new Error("Failed to fetch employee");
     const employee = await response.json();
 
@@ -247,7 +246,7 @@ async function updateEmployee(id) {
     // Convert is_active to boolean
     data.is_active = data.is_active === "on";
 
-    const response = await fetch(`/api/v1/employees/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/v1/employees/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -15,6 +15,8 @@ class Employee(BaseModel, Base):
 
     first_name = Column(String(60), nullable=False)
     last_name = Column(String(60), nullable=False)
+    gender = Column(String(60), nullable=True)
+    status = Column(String(60), nullable=True)
     role = Column(String(60), default='employee')
     department = Column(String(60), default='Production')
     email = Column(String(60), unique=True, nullable=True)
