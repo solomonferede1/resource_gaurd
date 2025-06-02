@@ -18,6 +18,11 @@ from werkzeug.security import generate_password_hash
 
 employees = [
     Employee(
+        first_name="admin", last_name="admin", gender="Male", status="active",
+        email="admin@resourceguard.com", phone="0000000000", salary=0000,
+        department="Production", password=generate_password_hash("admin123")
+    ),
+    Employee(
         first_name="John", last_name="Doe", gender="Male", status="active",
         email="john.doe@example.com", phone="1234567890", salary=5000,
         department="Production", password=generate_password_hash("john@2025")
