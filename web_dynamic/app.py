@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """Main application file with Employee-based authentication"""
 
-from flask import Flask, render_template, flash, redirect, url_for, request
+from flask import Flask, render_template, flash, redirect, url_for, request, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from models import storage
 from models.employee import Employee
 from models.product import Product
 from models.raw_material import RawMaterial
-from models.catagory import Catagory
+from models.category import Category
 from models.supplier import Supplier
 from web_dynamic.forms import RegistrationForm, LoginForm
 from math import ceil
@@ -194,13 +194,29 @@ def add_employee():
 @login_required
 def product():
     products = storage.all(Product).values()
+    categories = storage.all(Category).values()
     if products:
-        return render_template('product.html', products=products)
+        return render_template('product.html', products=products, categories=categories)
+
+
+@app.route('/filter_products_by_category', methods=['GET'])
+def filter_products_by_category():
+    category_id = request.args.get('category_id')
+
+    if category_id == "all" or category_id:
+        products = [product.to_dict() for product in storage.all(Product).values()]
+    else:
+        products = storage.products_filter_by_category(category_id)
+    print(products)
+    print(jsonify(products))
+    return jsonify(products=products)
+
+
 
 @app.route('/add_product', strict_slashes=False)
 @login_required
 def add_product():
-    categories = storage.all(Catagory).values()
+    categories = storage.all(Category).values()
     if categories:
         return render_template('add_product.html', categories=categories)
 

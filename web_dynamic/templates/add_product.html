@@ -15,9 +15,9 @@ extra_css %}
           <label for="category">Select Product Category:</label>
           <select class="form-control" id="category" required>
             <option value="" disabled selected>Select Catagory</option>
-            {% for catagory in catagories %}
+            {% for category in categories %}
             <option value="{{ catagory.id }}">
-              {{ catagory.catagory_name }}
+              {{ category.category_name }}
             </option>
             {% endfor %}
           </select>

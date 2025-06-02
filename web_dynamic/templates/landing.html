@@ -1,91 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResourceGuard - Inventory Management</title>
-    <link rel="stylesheet" href="../static/styles/landing.css">
-</head>
-<body>
-
-    <!-- Header -->
-    <header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResourceGuard - Smart Inventory Management</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/landing.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header class="glass-nav">
+      <div class="container">
         <div class="logo">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="ResourceGuard"
+          />
+          <span>ResourceGuard</span>
         </div>
         <nav>
-            <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#showcase">Screenshots</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-            </ul>
+          <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#showcase">Demo</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div class="auth-buttons">
+            <a href="{{ url_for('login') }}" class="btn-login">Login</a>
+            <a href="{{ url_for('login') }}" class="btn-primary">Get Started</a>
+          </div>
+          <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+          </div>
         </nav>
+      </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Effortlessly Manage Your Inventory and Resources</h1>
-        <p>Stay in control of your raw materials, products, and employees.</p>
-        <a href="{{ url_for('login') }}" class="cta1">Get Started Now</a>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Transform Your Inventory Management</h1>
+          <p class="hero-subtitle">
+            Real-time tracking, automated workflows, and powerful analytics for
+            your manufacturing business
+          </p>
+          <div class="hero-cta">
+            <a href="{{ url_for('login') }}" class="btn-primary"
+              >Start Free Trial</a
+            >
+            <a href="#demo-video" class="btn-secondary">
+              <i class="fas fa-play-circle"></i> Watch Demo
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>500+</h3>
+              <p>Businesses Trust Us</p>
+            </div>
+            <div class="stat-item">
+              <h3>24/7</h3>
+              <p>Support Available</p>
+            </div>
+            <div class="stat-item">
+              <h3>99.9%</h3>
+              <p>Uptime Guarantee</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img
+            src="{{ url_for('static', filename='images/hero-dashboard.png') }}"
+            alt="Dashboard Preview"
+            class="hero-dashboard"
+          />
+          <div class="floating-card inventory-card">
+            <i class="fas fa-boxes"></i>
+            <p>Inventory Updated</p>
+          </div>
+          <div class="floating-card alert-card">
+            <i class="fas fa-bell"></i>
+            <p>Low Stock Alert</p>
+          </div>
+        </div>
+      </div>
     </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-badges">
+      <div class="container">
+        <p>Trusted by leading manufacturers:</p>
+        <div class="badges">
+          <img
+            src="{{ url_for('static', filename='images/company1.png') }}"
+            alt="Company 1"
+          />
+          <img
+            src="{{ url_for('static', filename='images/company2.png') }}"
+            alt="Company 2"
+          />
+          <img
+            src="{{ url_for('static', filename='images/company3.png') }}"
+            alt="Company 3"
+          />
+          <img
+            src="{{ url_for('static', filename='images/company4.png') }}"
+            alt="Company 4"
+          />
+        </div>
+      </div>
+    </section>
+
     <!-- Features Section -->
-    <section id="features">
-        <h2>Main Features</h2>
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Powerful Features for Complete Control</h2>
+          <p>Everything you need to optimize your inventory management</p>
+        </div>
         <div class="feature-grid">
-            <div class="feature">
-                <img src="{{ url_for('static', filename='images/products.png') }}" alt="Product Icon" class="feature-avatar">
-                <h3>Product Management</h3>
-                <p>Manage your products effortlessly.</p>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-barcode"></i>
             </div>
-            <div class="feature">
-                <img src="{{ url_for('static', filename='images/raw_materials.png') }}" alt="Raw Materials Icon" class="feature-avatar">
-                <h3>Raw Material Tracking</h3>
-                <p>Track and manage all your raw materials.</p>
+            <h3>Real-time Tracking</h3>
+            <p>
+              Monitor stock levels, movements, and consumption patterns in
+              real-time across all locations.
+            </p>
+            <a href="#" class="feature-link"
+              >Learn more <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-robot"></i>
             </div>
-            <div class="feature">
-                <img src="{{ url_for('static', filename='images/employee.png') }}" alt="Employee Icon" class="feature-avatar">
-                <h3>Employee Management</h3>
-                <p>Manage employee records, attendance, and payroll.</p>
+            <h3>Automated Reordering</h3>
+            <p>
+              Smart algorithms predict demand and automatically generate
+              purchase orders when stock runs low.
+            </p>
+            <a href="#" class="feature-link"
+              >Learn more <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
             </div>
+            <h3>Advanced Analytics</h3>
+            <p>
+              Comprehensive reports and dashboards to identify trends and
+              optimize inventory turnover.
+            </p>
+            <a href="#" class="feature-link"
+              >Learn more <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-users-cog"></i>
+            </div>
+            <h3>Employee Management</h3>
+            <p>
+              Track attendance, manage payroll, and assign roles with our
+              integrated HR features.
+            </p>
+            <a href="#" class="feature-link"
+              >Learn more <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-exchange-alt"></i>
+            </div>
+            <h3>Transaction History</h3>
+            <p>
+              Complete audit trail of all inventory movements with timestamped
+              records.
+            </p>
+            <a href="#" class="feature-link"
+              >Learn more <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Mobile Access</h3>
+            <p>
+              Manage your inventory on-the-go with our iOS and Android apps.
+            </p>
+            <a href="#" class="feature-link"
+              >Learn more <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Showcase Section -->
-    <section id="showcase">
-        <h2>See How ResourceGuard Works</h2>
-        <div class="showcase-grid">
-            <div>
-                <img src="{{ url_for('static', filename='images/product.jpg') }}" alt="Product Dashboard" class="Screenshots-image">
-                <p>Product management at your fingertips.</p>
-            </div>
-            <div>
-                <img src="{{ url_for('static', filename='images/raw_material.jpg') }}" alt="Raw Material Dashboard" class="Screenshots-image">
-                <p>Raw material tracking and stock levels.</p>
-            </div>
-            <div>
-                <img src="{{ url_for('static', filename='images/employee.jpg') }}" alt="Employee Dashboard" class="Screenshots-image">
-                <p>Manage employee data and attendance seamlessly.</p>
-            </div>
-            <!-- Additional showcases -->
+    <!-- Demo Video Section -->
+    <section id="demo-video" class="demo-video">
+      <div class="container">
+        <div class="video-container">
+          <div class="video-placeholder">
+            <img
+              src="{{ url_for('static', filename='images/video-thumbnail.jpg') }}"
+              alt="Video Thumbnail"
+            />
+            <button class="play-button">
+              <i class="fas fa-play"></i>
+            </button>
+          </div>
+          <div class="video-content">
+            <h2>See ResourceGuard in Action</h2>
+            <p>
+              Watch our 2-minute product tour to see how ResourceGuard can
+              transform your inventory management.
+            </p>
+            <ul class="video-features">
+              <li><i class="fas fa-check-circle"></i> Dashboard walkthrough</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Inventory management demo
+              </li>
+              <li><i class="fas fa-check-circle"></i> Reporting features</li>
+            </ul>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="cta-section">
-        <h2>Take Control of Your Inventory Today!</h2>
-        <a href="{{ url_for('login') }}" class="cta">Get Started Now</a>
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2>What Our Customers Say</h2>
+          <p>Don't just take our word for it</p>
+        </div>
+        <div class="testimonial-slider">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>
+                "ResourceGuard reduced our inventory errors by 85% in the first
+                month. The automated alerts alone have saved us thousands in
+                lost productivity."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img
+                src="{{ url_for('static', filename='images/testimonial1.jpg') }}"
+                alt="Sarah Johnson"
+              />
+              <div>
+                <h4>Sarah Johnson</h4>
+                <p>Operations Manager, ElectroFab</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>
+                "The employee management features have streamlined our HR
+                processes. We've cut payroll processing time by 60% while
+                improving accuracy."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img
+                src="{{ url_for('static', filename='images/testimonial2.jpg') }}"
+                alt="Michael Chen"
+              />
+              <div>
+                <h4>Michael Chen</h4>
+                <p>CEO, PowerTech Solutions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-card">
+          <h2>Ready to Transform Your Inventory Management?</h2>
+          <p>
+            Join thousands of manufacturers who trust ResourceGuard to optimize
+            their operations.
+          </p>
+          <div class="cta-buttons">
+            <a href="{{ url_for('login') }}" class="btn-primary"
+              >Start Free Trial</a
+            >
+            <a href="#contact" class="btn-secondary">Request Demo</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 ResourceGuard. All rights reserved.</p>
-        <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-        </ul>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-about">
+            <div class="logo">
+              <img
+                src="{{ url_for('static', filename='images/logo-white.png') }}"
+                alt="ResourceGuard"
+              />
+              <span>ResourceGuard</span>
+            </div>
+            <p>
+              Powerful inventory management solutions for modern manufacturers.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#demo-video">Demo</a></li>
+              <li><a href="#">Updates</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-newsletter">
+            <h3>Stay Updated</h3>
+            <p>
+              Subscribe to our newsletter for product updates and industry
+              insights.
+            </p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" />
+              <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 ResourceGuard. All rights reserved.</p>
+          <div class="legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
     </footer>
 
-</body>
+    <script src="{{ url_for('static', filename='scripts/landing.js') }}"></script>
+  </body>
 </html>

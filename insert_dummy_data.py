@@ -4,7 +4,7 @@ from models import storage
 from models.employee import Employee
 from models.attendance import Attendance
 from models.payroll import Payroll
-from models.catagory import Catagory
+from models.category import Category
 from models.product import Product
 from models.supplier import Supplier
 from models.raw_material import RawMaterial
@@ -184,16 +184,16 @@ for payroll in payroll_data:
 storage.save()
 
 
-catagory_data = [
-    {'catagory_name': 'Charger'},
-    {'catagory_name': 'Adapter'},
-    {'catagory_name': 'Light'},
+category_data = [
+    {'category_name': 'Charger'},
+    {'category_name': 'Adapter'},
+    {'category_name': 'Light'},
 ]
 
 # Example of how you might insert these into the database:
-for data in catagory_data:
-    catagory = Catagory(**data)
-    storage.new(catagory)  # Assuming `storage` is your session manager
+for data in category_data:
+    category = Category(**data)
+    storage.new(category)
 
 # Sample product data with varying types and categories
 product_data = [

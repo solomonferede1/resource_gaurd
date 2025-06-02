@@ -4,7 +4,7 @@
 from models.employee import Employee
 from models.attendance import Attendance
 from models.payroll import Payroll
-from models.catagory import Catagory
+from models.category import Category
 from models.product import Product
 from models.supplier import Supplier
 from models.raw_material import RawMaterial
@@ -23,7 +23,7 @@ def number_objects():
     """ Retrieves the number of each objects by type """
 
     classes = {'Employee' : Employee, 'Attendance' : Attendance,
-               'Payroll' : Payroll, 'Catagory' : Catagory,'Product' : Product,
+               'Payroll' : Payroll, 'Category' : Category,'Product' : Product,
                'Supplier' : Supplier, 'RawMaterial' : RawMaterial,
                'ProductTransaction' : ProductTransaction,
                'RawMaterialTransaction' : RawMaterialTransaction}

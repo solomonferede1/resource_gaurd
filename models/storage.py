@@ -9,7 +9,7 @@ from models.base_model import Base
 from models.employee import Employee
 from models.attendance import Attendance
 from models.payroll import Payroll
-from models.catagory import Catagory
+from models.category import Category
 from models.product import Product
 from models.supplier import Supplier
 from models.raw_material import RawMaterial
@@ -18,7 +18,7 @@ from models.raw_material_transaction import RawMaterialTransaction
 
 
 classes = {'Employee' : Employee, 'Attendance' : Attendance,
-           'Payroll' : Payroll, 'Catagory' : Catagory,
+           'Payroll' : Payroll, 'Category' : Category,
            'Product' : Product, 'Supplier' : Supplier,
            'RawMaterial' : RawMaterial, 'ProductTransaction' : ProductTransaction,
            'RawMaterialTransaction' : RawMaterialTransaction}
@@ -120,3 +120,27 @@ class DBStorage:
             if emp.email == email:
                 return emp
         return None
+
+    def products_filter_by_category(self, category_id):
+        """
+        Returns a list of Product objects filtered by category_id.
+        Converts each product to a dictionary before returning.
+        
+        Args:
+            category_id: The category ID to filter by (int or str)
+            
+        Returns:
+            List of product dictionaries
+        """
+        if not category_id:
+            return []
+
+        try:
+            category_id = int(category_id)
+            products = [
+                product for product in self.all(Product).values()
+                if product.category_id == category_id
+            ]
+            return [product.to_dict() for product in products]
+        except (ValueError, TypeError):
+            return []

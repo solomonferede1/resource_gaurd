@@ -7,14 +7,14 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
 
-class Catagory(BaseModel, Base):
-    '''Define the catagory'''
+class Category(BaseModel, Base):
+    '''Define the category'''
 
-    __tablename__ = 'catagories'
+    __tablename__ = 'categories'
 
-    catagory_name = Column(String(60), nullable=False)
+    category_name = Column(String(60), nullable=False)
 
-    products = relationship('Product', backref='catagory',
+    products = relationship('Product', backref='category',
                             cascade='all, delete, delete-orphan')
 
     def __init__(self, *args, **kwargs):

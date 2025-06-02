@@ -19,7 +19,7 @@ class Product(BaseModel, Base):
     production_date = Column(DateTime, nullable=False, default=datetime.utcnow)
     deleted_at = Column(DateTime, nullable=True)  # Soft delete column
 
-    category_id = Column(Integer, ForeignKey('catagories.id'), nullable=False)
+    category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
 
     # Define relationship
     transactions = relationship('ProductTransaction', backref='product')
