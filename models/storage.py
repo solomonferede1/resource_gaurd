@@ -24,7 +24,6 @@ classes = {'Employee' : Employee, 'Attendance' : Attendance,
            'RawMaterialTransaction' : RawMaterialTransaction}
 
 
-
 class DBStorage:
     '''Database Storage class'''
 
@@ -93,6 +92,7 @@ class DBStorage:
             return None
 
         all_cls = models.storage.all(cls)
+        id = int(id) if isinstance(id, str) and id.isdigit() else id
         for value in all_cls.values():
             if (value.id == id):
                 return value
@@ -113,3 +113,10 @@ class DBStorage:
             count = len(models.storage.all(cls).values())
 
         return count
+
+    def find_employee_by_email(self, email):
+        """More efficient email lookup"""
+        for emp in self.all(Employee).values():
+            if emp.email == email:
+                return emp
+        return None

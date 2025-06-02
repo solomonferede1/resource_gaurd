@@ -56,18 +56,44 @@
                 </button>
               </form>
             </div>
-            <div class="user-profile ms-3">
-              <img
-                src="{{ url_for('static', filename='images/tof.jpg') }}"
-                alt="User"
-                class="user-avatar"
-              />
+            <div class="dropdown ms-3">
+              <a
+                href="#"
+                class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                id="userDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="{{ url_for('static', filename='images/tof.jpg') }}"
+                  alt="User"
+                  class="rounded-circle user-avatar"
+                />
+                <span class="d-none d-sm-inline ms-2"
+                  >{{ current_user.first_name }}</span
+                >
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="userDropdown"
+              >
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="fas fa-user me-2"></i> Profile</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="{{ url_for('logout') }}"
+                    ><i class="fas fa-sign-out-alt me-2"></i> Logout</a
+                  >
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </header>
-
     <!-- Main Content -->
     <div class="main-wrapper">
       <!-- Sidebar -->

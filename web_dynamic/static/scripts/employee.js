@@ -16,15 +16,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const url = new URL(window.location.href);
 
     // Reset to first page when filters change
-    url.searchParams.set("page", 1);
+    url.searchParams.set("page", "1"); // Ensure page is set as string
     url.searchParams.set("search", search);
     url.searchParams.set("department", department);
 
     window.location.href = url.toString();
   }
 
-  searchInput.addEventListener("input", () => debounce(applyFilters, 500));
-  departmentFilter.addEventListener("change", applyFilters);
+  if (searchInput) {
+    searchInput.addEventListener("input", () => debounce(applyFilters, 500));
+  }
+  if (departmentFilter) {
+    departmentFilter.addEventListener("change", applyFilters);
+  }
+
+  // Initialize delete confirmation handler
+  const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+  if (confirmDeleteBtn) {
+    confirmDeleteBtn.addEventListener("click", function () {
+      handleEmployeeDelete();
+    });
+  }
 });
 
 // View Employee Modal
@@ -114,11 +126,18 @@ function viewEmployee(id) {
                 </div>
             `;
 
-      document.getElementById("viewEmployeeContent").innerHTML = modalContent;
-      const modal = new bootstrap.Modal(
-        document.getElementById("viewEmployeeModal")
+      const viewEmployeeContentElement = document.getElementById(
+        "viewEmployeeContent"
       );
-      modal.show();
+      if (viewEmployeeContentElement) {
+        viewEmployeeContentElement.innerHTML = modalContent;
+      }
+
+      const modalElement = document.getElementById("viewEmployeeModal");
+      if (modalElement) {
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -128,82 +147,171 @@ function viewEmployee(id) {
 
 // Delete Employee Functionality
 let currentEmployeeToDelete = null;
+let isDeleting = false; // Flag to prevent multiple delete clicks
 
 function confirmDelete(id) {
   currentEmployeeToDelete = id;
-  const modal = new bootstrap.Modal(
-    document.getElementById("confirmDeleteModal")
-  );
-  modal.show();
+  const modalElement = document.getElementById("confirmDeleteModal");
+  if (modalElement) {
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
+  }
 }
 
-document
-  .getElementById("confirmDeleteBtn")
-  .addEventListener("click", function () {
-    if (!currentEmployeeToDelete) return;
+async function handleEmployeeDelete() {
+  if (!currentEmployeeToDelete || isDeleting) return;
 
-    fetch(`${API_BASE_URL}/api/v1/employees/${currentEmployeeToDelete}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to delete employee");
-        return response.json();
-      })
-      .then(() => {
-        showNotification("Employee deleted successfully", "success");
-        removeEmployeeRow(currentEmployeeToDelete);
-        bootstrap.Modal.getInstance(
-          document.getElementById("confirmDeleteModal")
-        ).hide();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        showNotification("Failed to delete employee", "error");
-      })
-      .finally(() => {
-        currentEmployeeToDelete = null;
-      });
-  });
+  isDeleting = true;
+  const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+  const originalText = confirmDeleteBtn
+    ? confirmDeleteBtn.textContent
+    : "Delete";
 
-function removeEmployeeRow(employeeId) {
-  const row = document.querySelector(`tr[data-employee-id="${employeeId}"]`);
-  if (row) {
-    row.classList.add("fade-out");
-    setTimeout(() => row.remove(), 300);
+  try {
+    // Update button state to show loading
+    if (confirmDeleteBtn) {
+      confirmDeleteBtn.disabled = true;
+      confirmDeleteBtn.innerHTML =
+        '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Deleting...';
+    }
+
+    // Show loading state on the employee row
+    const employeeRow = document.querySelector(
+      `tr[data-employee-id="${currentEmployeeToDelete}"]`
+    );
+    if (employeeRow) {
+      employeeRow.style.opacity = "0.5";
+      employeeRow.style.pointerEvents = "none"; // Disable interactions
+    }
+
+    const response = await fetch(
+      `${API_BASE_URL}/api/v1/employees/${currentEmployeeToDelete}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.message || `HTTP error! status: ${response.status}`
+      );
+    }
+
+    const result = await response.json();
+    if (result.success === false) {
+      throw new Error(result.message || "Delete operation failed on server.");
+    }
+
+    showNotification("Employee deleted successfully", "success");
+
+    await removeEmployeeRowWithConfirmation(currentEmployeeToDelete);
+
+    const modalElement = document.getElementById("confirmDeleteModal");
+    if (modalElement) {
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      if (modalInstance) {
+        modalInstance.hide();
+      }
+    }
+
+    await refreshEmployeeListIfNeeded();
+  } catch (error) {
+    console.error("Error deleting employee:", error);
+
+    const employeeRow = document.querySelector(
+      `tr[data-employee-id="${currentEmployeeToDelete}"]`
+    );
+    if (employeeRow) {
+      employeeRow.style.opacity = "1";
+      employeeRow.style.pointerEvents = "auto";
+    }
+
+    showNotification(
+      error.message || "Failed to delete employee. Please try again.",
+      "error"
+    );
+  } finally {
+    if (confirmDeleteBtn) {
+      confirmDeleteBtn.disabled = false;
+      confirmDeleteBtn.textContent = originalText;
+    }
+
+    isDeleting = false;
+    currentEmployeeToDelete = null;
   }
+}
+
+async function removeEmployeeRowWithConfirmation(employeeId) {
+  return new Promise((resolve) => {
+    const row = document.querySelector(`tr[data-employee-id="${employeeId}"]`);
+    if (row) {
+      row.classList.add("fade-out");
+      setTimeout(() => {
+        if (row.parentNode) {
+          row.remove();
+        }
+        resolve();
+      }, 300);
+    } else {
+      resolve();
+    }
+  });
+}
+
+async function refreshEmployeeListIfNeeded() {
+  const employeeRows = document.querySelectorAll("tbody tr[data-employee-id]");
+
+  if (employeeRows.length === 0) {
+    const url = new URL(window.location.href);
+    const currentPage = parseInt(url.searchParams.get("page") || "1");
+
+    if (currentPage > 1) {
+      url.searchParams.set("page", (currentPage - 1).toString());
+      window.location.href = url.toString();
+    } else {
+      window.location.reload();
+    }
+  }
+  window.location.reload();
 }
 
 // Edit Employee Functionality
 async function editEmployee(id) {
   try {
-    // Fetch employee data
     const response = await fetch(`${API_BASE_URL}/api/v1/employees/${id}`);
     if (!response.ok) throw new Error("Failed to fetch employee");
     const employee = await response.json();
 
-    // Load edit form template
     const formResponse = await fetch("/get_edit_form");
     if (!formResponse.ok) throw new Error("Failed to load form");
     const formHtml = await formResponse.text();
 
-    // Populate form with employee data
     const container = document.getElementById("editEmployeeFormContainer");
+    if (!container) throw new Error("Edit form container not found");
+
     container.innerHTML = formHtml;
     populateForm(employee);
 
-    // Initialize modal
-    const modal = new bootstrap.Modal(
-      document.getElementById("editEmployeeModal")
-    );
-    modal.show();
+    const modalElement = document.getElementById("editEmployeeModal");
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    }
 
-    // Setup form submission
-    document
-      .getElementById("editEmployeeForm")
-      .addEventListener("submit", async (e) => {
+    const editForm = document.getElementById("editEmployeeForm");
+    if (editForm) {
+      const newForm = editForm.cloneNode(true);
+      editForm.parentNode.replaceChild(newForm, editForm);
+
+      newForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         await updateEmployee(id);
       });
+    }
   } catch (error) {
     console.error("Error:", error);
     showNotification("Failed to load employee data", "error");
@@ -212,25 +320,47 @@ async function editEmployee(id) {
 
 function populateForm(employee) {
   const form = document.getElementById("editEmployeeForm");
+  if (!form) return;
+
+  // Populate standard text/number/select inputs
   for (const [key, value] of Object.entries(employee)) {
+    // Skip radio buttons and checkboxes here, they are handled separately
     const input = form.querySelector(`[name="${key}"]`);
-    if (input) {
-      if (input.type === "checkbox") {
-        input.checked = value;
-      } else if (input.type === "radio") {
-        if (input.value === value) {
-          input.checked = true;
-        }
-      } else {
-        input.value = value !== null ? value : "";
-      }
+    if (input && input.type !== "radio" && input.type !== "checkbox") {
+      input.value = value !== null && value !== undefined ? String(value) : "";
     }
+  }
+
+  // Special handling for gender radio buttons
+  if (employee.gender) {
+    const genderRadios = form.querySelectorAll('input[name="gender"]');
+    genderRadios.forEach((radio) => {
+      if (
+        radio instanceof HTMLInputElement &&
+        radio.value === employee.gender
+      ) {
+        radio.checked = true;
+      }
+    });
+  }
+
+  // *** MODIFIED: Special handling for 'status' radio buttons ***
+  if (employee.status) {
+    const statusRadios = form.querySelectorAll('input[name="status"]');
+    statusRadios.forEach((radio) => {
+      if (
+        radio instanceof HTMLInputElement &&
+        radio.value === employee.status
+      ) {
+        radio.checked = true;
+      }
+    });
   }
 
   // Special handling for date fields
   if (employee.date_hired) {
     const dateInput = form.querySelector("#date_hired");
-    if (dateInput) {
+    if (dateInput instanceof HTMLInputElement && dateInput.type === "date") {
       const date = new Date(employee.date_hired);
       dateInput.value = date.toISOString().split("T")[0];
     }
@@ -238,13 +368,35 @@ function populateForm(employee) {
 }
 
 async function updateEmployee(id) {
+  const saveChangesBtn = document.querySelector(
+    "#editEmployeeForm .btn-orange"
+  );
+  const originalBtnText = saveChangesBtn
+    ? saveChangesBtn.textContent
+    : "Save Changes";
+
   try {
     const form = document.getElementById("editEmployeeForm");
+    if (!form) throw new Error("Edit form not found");
+
+    if (saveChangesBtn) {
+      saveChangesBtn.disabled = true;
+      saveChangesBtn.innerHTML =
+        '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Saving...';
+    }
+
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    // Convert is_active to boolean
-    data.is_active = data.is_active === "on";
+    // *** MODIFIED: 'status' is now directly from the radio buttons, no conversion needed ***
+    // The 'status' field will be present in 'data' if a radio button is selected.
+    // If no status is selected (e.g., form validation issue), you might want a default.
+    // For now, assuming 'status' will always be 'active' or 'inactive' from the form.
+
+    // Convert salary to number
+    if (data.salary) {
+      data.salary = parseFloat(data.salary);
+    }
 
     const response = await fetch(`${API_BASE_URL}/api/v1/employees/${id}`, {
       method: "PUT",
@@ -254,23 +406,35 @@ async function updateEmployee(id) {
       body: JSON.stringify(data),
     });
 
-    if (!response.ok) throw new Error("Failed to update employee");
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.message || `HTTP error! status: ${response.status}`
+      );
+    }
 
     const updatedEmployee = await response.json();
 
-    // Show success notification
     showNotification("Employee updated successfully", "success");
 
-    // Update the table row
+    // Update the table row with the fresh data from the server
     updateEmployeeRow(id, updatedEmployee);
 
-    // Close modal
-    bootstrap.Modal.getInstance(
-      document.getElementById("editEmployeeModal")
-    ).hide();
+    const modalElement = document.getElementById("editEmployeeModal");
+    if (modalElement) {
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      if (modalInstance) {
+        modalInstance.hide();
+      }
+    }
   } catch (error) {
     console.error("Error:", error);
-    showNotification("Failed to update employee", "error");
+    showNotification(error.message || "Failed to update employee", "error");
+  } finally {
+    if (saveChangesBtn) {
+      saveChangesBtn.disabled = false;
+      saveChangesBtn.textContent = originalBtnText;
+    }
   }
 }
 
@@ -278,54 +442,82 @@ function updateEmployeeRow(id, employee) {
   const row = document.querySelector(`tr[data-employee-id="${id}"]`);
   if (!row) return;
 
-  // Highlight the updated row
   row.classList.add("updated-row");
   setTimeout(() => row.classList.remove("updated-row"), 1500);
 
-  // Update each cell with new data
-  row.cells[1].textContent = `${employee.first_name} ${employee.last_name}`;
-  row.cells[2].innerHTML =
-    employee.gender === "Male"
-      ? '<i class="fas fa-mars" style="color: #3498db;"></i> Male'
-      : '<i class="fas fa-venus" style="color: #e83e8c;"></i> Female';
-  row.cells[3].textContent = employee.role;
-  row.cells[4].textContent = employee.department;
-  row.cells[5].textContent = `ETB ${(employee.salary || 0).toLocaleString(
-    "en-US",
-    { minimumFractionDigits: 2, maximumFractionDigits: 2 }
-  )}`;
-  row.cells[6].textContent = employee.date_hired
-    ? new Date(employee.date_hired).toLocaleDateString("en-US", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      })
-    : "N/A";
-  row.cells[7].innerHTML = `<span class="status-badge status-${
-    employee.is_active ? "active" : "inactive"
-  }">
-        ${employee.is_active ? "Active" : "Inactive"}
-    </span>`;
+  const cells = row.cells;
+  if (cells.length >= 8) {
+    cells[1].textContent = `${employee.first_name} ${employee.last_name}`;
+    cells[2].innerHTML =
+      employee.gender === "Male"
+        ? '<i class="fas fa-mars" style="color: #3498db;"></i> Male'
+        : '<i class="fas fa-venus" style="color: #e83e8c;"></i> Female';
+    cells[3].textContent = employee.role;
+    cells[4].textContent = employee.department;
+    cells[5].textContent = `ETB ${(employee.salary || 0).toLocaleString(
+      "en-US",
+      { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+    )}`;
+    cells[6].textContent = employee.date_hired
+      ? new Date(employee.date_hired).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })
+      : "N/A";
+    // Use employee.status directly for display
+    cells[7].innerHTML = `<span class="status-badge status-${employee.status}">
+          ${employee.status.charAt(0).toUpperCase() + employee.status.slice(1)}
+      </span>`;
+  }
 }
 
 // Notification function
 function showNotification(message, type = "success") {
   const notification = document.getElementById("notification");
+  if (!notification) return;
+
   const alertClass = type === "success" ? "alert-success" : "alert-danger";
+  const iconClass =
+    type === "success" ? "fas fa-check-circle" : "fas fa-exclamation-triangle";
 
   notification.innerHTML = `
         <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+            <i class="${iconClass} me-2"></i>
             ${message}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     `;
 
-  // Auto-remove after 5 seconds
   setTimeout(() => {
     const alert = notification.querySelector(".alert");
     if (alert) {
       alert.classList.remove("show");
-      setTimeout(() => (notification.innerHTML = ""), 150);
+      setTimeout(() => {
+        if (notification.innerHTML.includes(message)) {
+          notification.innerHTML = "";
+        }
+      }, 150);
     }
   }, 5000);
 }
+
+window.addEventListener("unhandledrejection", (event) => {
+  console.error("Unhandled promise rejection:", event.reason);
+  if (
+    event.reason instanceof TypeError &&
+    event.reason.message === "Failed to fetch"
+  ) {
+    showNotification(
+      "Network error occurred. Please check your connection.",
+      "error"
+    );
+  } else if (event.reason && event.reason.message) {
+    showNotification(
+      `An unexpected error occurred: ${event.reason.message}`,
+      "error"
+    );
+  } else {
+    showNotification("An unexpected error occurred.", "error");
+  }
+});

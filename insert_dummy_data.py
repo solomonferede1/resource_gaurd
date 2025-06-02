@@ -14,27 +14,109 @@ from datetime import date, datetime
 
 
 # Expanded list of 20 Employee objects with departments
+from werkzeug.security import generate_password_hash
+
 employees = [
-    Employee(first_name="John", last_name="Doe", gender="Male", status="active", email="john.doe@example.com", phone="1234567890", salary=5000, department="Production"),
-    Employee(first_name="Jane", last_name="Smith", gender="Female", status="active", email="jane.smith@example.com", phone="0987654321", salary=5500, department="Maintenance"),
-    Employee(first_name="Michael", last_name="Johnson", gender="Male", status="active", email="michael.johnson@example.com", phone="1122334455", salary=6000, department="Engineering"),
-    Employee(first_name="Emily", last_name="Davis", gender="Female", status="active", email="emily.davis@example.com", phone="2233445566", salary=4800, department="Administrative"),
-    Employee(first_name="Chris", last_name="Brown", gender="Male", status="active", email="chris.brown@example.com", phone="3344556677", salary=5200, department="Production"),
-    Employee(first_name="Olivia", last_name="Taylor", gender="Female", status="active", email="olivia.taylor@example.com", phone="4455667788", salary=5700, department="Maintenance"),
-    Employee(first_name="Daniel", last_name="Wilson", gender="Male", status="active", email="daniel.wilson@example.com", phone="5566778899", salary=5300, department="Engineering"),
-    Employee(first_name="Sophia", last_name="Martinez", gender="Female", status="active", email="sophia.martinez@example.com", phone="6677889900", salary=4900, department="Administrative"),
-    Employee(first_name="David", last_name="Anderson", gender="Male", status="active", email="david.anderson@example.com", phone="7788990011", salary=5100, department="Production"),
-    Employee(first_name="Emma", last_name="Thomas", gender="Female", status="active", email="emma.thomas@example.com", phone="8899001122", salary=5600, department="Maintenance"),
-    Employee(first_name="James", last_name="Jackson", gender="Male", status="active", email="james.jackson@example.com", phone="9900112233", salary=6200, department="Engineering"),
-    Employee(first_name="Ava", last_name="White", gender="Female", status="active", email="ava.white@example.com", phone="1011121314", salary=4700, department="Administrative"),
-    Employee(first_name="William", last_name="Harris", gender="Male", status="active", email="william.harris@example.com", phone="1112131415", salary=5400, department="Production"),
-    Employee(first_name="Mia", last_name="Clark", gender="Female", status="active", email="mia.clark@example.com", phone="1213141516", salary=5800, department="Maintenance"),
-    Employee(first_name="Joseph", last_name="Lewis", gender="Male", status="Inactive", email="joseph.lewis@example.com", phone="1314151617", salary=6000, department="Engineering"),
-    Employee(first_name="Isabella", last_name="Lee", gender="Female", status="active", email="isabella.lee@example.com", phone="1415161718", salary=4900, department="Administrative"),
-    Employee(first_name="Benjamin", last_name="Walker", gender="Male", status="active", email="benjamin.walker@example.com", phone="1516171819", salary=5200, department="Production"),
-    Employee(first_name="Charlotte", last_name="Hall", gender="Female", status="active", email="charlotte.hall@example.com", phone="1617181920", salary=5700, department="Maintenance"),
-    Employee(first_name="Ethan", last_name="Allen", gender="Male", status="active", email="ethan.allen@example.com", phone="1718192021", salary=6100, department="Engineering"),
-    Employee(first_name="Amelia", last_name="Young", gender="Female", status="active", email="amelia.young@example.com", phone="1819202122", salary=4800, department="Administrative")
+    Employee(
+        first_name="John", last_name="Doe", gender="Male", status="active",
+        email="john.doe@example.com", phone="1234567890", salary=5000,
+        department="Production", password=generate_password_hash("john@2025")
+    ),
+    Employee(
+        first_name="Jane", last_name="Smith", gender="Female", status="active",
+        email="jane.smith@example.com", phone="0987654321", salary=5500,
+        department="Maintenance", password=generate_password_hash("jane@2025")
+    ),
+    Employee(
+        first_name="Michael", last_name="Johnson", gender="Male", status="active",
+        email="michael.johnson@example.com", phone="1122334455", salary=6000,
+        department="Engineering", password=generate_password_hash("michael@2025")
+    ),
+    Employee(
+        first_name="Emily", last_name="Davis", gender="Female", status="active",
+        email="emily.davis@example.com", phone="2233445566", salary=4800,
+        department="Administrative", password=generate_password_hash("emily@2025")
+    ),
+    Employee(
+        first_name="Chris", last_name="Brown", gender="Male", status="active",
+        email="chris.brown@example.com", phone="3344556677", salary=5200,
+        department="Production", password=generate_password_hash("chris@2025")
+    ),
+    Employee(
+        first_name="Olivia", last_name="Taylor", gender="Female", status="active",
+        email="olivia.taylor@example.com", phone="4455667788", salary=5700,
+        department="Maintenance", password=generate_password_hash("olivia@2025")
+    ),
+    Employee(
+        first_name="Daniel", last_name="Wilson", gender="Male", status="active",
+        email="daniel.wilson@example.com", phone="5566778899", salary=5300,
+        department="Engineering", password=generate_password_hash("daniel@2025")
+    ),
+    Employee(
+        first_name="Sophia", last_name="Martinez", gender="Female", status="active",
+        email="sophia.martinez@example.com", phone="6677889900", salary=4900,
+        department="Administrative", password=generate_password_hash("sophia@2025")
+    ),
+    Employee(
+        first_name="David", last_name="Anderson", gender="Male", status="active",
+        email="david.anderson@example.com", phone="7788990011", salary=5100,
+        department="Production", password=generate_password_hash("david@2025")
+    ),
+    Employee(
+        first_name="Emma", last_name="Thomas", gender="Female", status="active",
+        email="emma.thomas@example.com", phone="8899001122", salary=5600,
+        department="Maintenance", password=generate_password_hash("emma@2025")
+    ),
+    Employee(
+        first_name="James", last_name="Jackson", gender="Male", status="active",
+        email="james.jackson@example.com", phone="9900112233", salary=6200,
+        department="Engineering", password=generate_password_hash("james@2025")
+    ),
+    Employee(
+        first_name="Ava", last_name="White", gender="Female", status="active",
+        email="ava.white@example.com", phone="1011121314", salary=4700,
+        department="Administrative", password=generate_password_hash("ava@2025")
+    ),
+    Employee(
+        first_name="William", last_name="Harris", gender="Male", status="active",
+        email="william.harris@example.com", phone="1112131415", salary=5400,
+        department="Production", password=generate_password_hash("william@2025")
+    ),
+    Employee(
+        first_name="Mia", last_name="Clark", gender="Female", status="active",
+        email="mia.clark@example.com", phone="1213141516", salary=5800,
+        department="Maintenance", password=generate_password_hash("mia@2025")
+    ),
+    Employee(
+        first_name="Joseph", last_name="Lewis", gender="Male", status="Inactive",
+        email="joseph.lewis@example.com", phone="1314151617", salary=6000,
+        department="Engineering", password=generate_password_hash("joseph@2025")
+    ),
+    Employee(
+        first_name="Isabella", last_name="Lee", gender="Female", status="active",
+        email="isabella.lee@example.com", phone="1415161718", salary=4900,
+        department="Administrative", password=generate_password_hash("isabella@2025")
+    ),
+    Employee(
+        first_name="Benjamin", last_name="Walker", gender="Male", status="active",
+        email="benjamin.walker@example.com", phone="1516171819", salary=5200,
+        department="Production", password=generate_password_hash("benjamin@2025")
+    ),
+    Employee(
+        first_name="Charlotte", last_name="Hall", gender="Female", status="active",
+        email="charlotte.hall@example.com", phone="1617181920", salary=5700,
+        department="Maintenance", password=generate_password_hash("charlotte@2025")
+    ),
+    Employee(
+        first_name="Ethan", last_name="Allen", gender="Male", status="active",
+        email="ethan.allen@example.com", phone="1718192021", salary=6100,
+        department="Engineering", password=generate_password_hash("ethan@2025")
+    ),
+    Employee(
+        first_name="Amelia", last_name="Young", gender="Female", status="active",
+        email="amelia.young@example.com", phone="1819202122", salary=4800,
+        department="Administrative", password=generate_password_hash("amelia@2025")
+    )
 ]
 
 # Loop through each employee and save them to the database

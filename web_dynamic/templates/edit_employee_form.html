@@ -100,15 +100,28 @@
       />
     </div>
 
+    <!-- MODIFIED: Replaced is_active checkbox with status radio buttons -->
     <div class="col-md-6">
+      <label class="form-label">Status</label>
       <div class="form-check form-switch">
         <input
           class="form-check-input"
-          type="checkbox"
-          id="is_active"
-          name="is_active"
+          type="radio"
+          name="status"
+          id="statusActive"
+          value="active"
         />
-        <label class="form-check-label" for="is_active">Active Employee</label>
+        <label class="form-check-label" for="statusActive">Active</label>
+      </div>
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="status"
+          id="statusInactive"
+          value="inactive"
+        />
+        <label class="form-check-label" for="statusInactive">Inactive</label>
       </div>
     </div>
   </div>
